@@ -3,8 +3,11 @@ import './App.css';
 import Auth from './components/Auth/Auth';
 import NavFile from './components/Navbar/Navbar';
 import GiftsCreate from './components/Gifts/Create';
+import GiftsList from './components/Gifts/List';
+import GiftsSearch from './components/Gifts/Search';
 import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import {Button} from 'reactstrap';
+import ItemsTable from './components/Gifts/Items';
 
 function App() {
 
@@ -15,6 +18,21 @@ function App() {
     const [name, setName] = useState('')
 
     
+    const handleSearch = () => {
+      fetch(`http://localhost:8081/gifts/name/${name}`, {
+          method: 'GET',
+      }).then(r => r.json())
+        .then(rArr => setRev(rArr))
+  }
+
+    
+    const fetchGifts = () => {
+      fetch(`http://localhost:8081/gifts`, {
+          method: 'GET'
+      }).then(r => r.json())
+        .then(rArr => setReviews(rArr))
+    }
+
     
     const updateToken = (newToken: any, id: any) => {
       setSessionToken(newToken)
@@ -42,13 +60,20 @@ function App() {
                   {/* <ReviewsList userId={userId} fetchReviews={fetchReviews} /> */}
                 </Route>
               </Switch> }
-            <input placeholder='Search Gifts' style={{borderRadius: '10px', marginLeft:'35vw', width:'200px', marginBottom:'20px', fontFamily:'Roboto'}} id='name' onChange={e => setName(e.target.value)} />
-            {/* <Button id='search' style={{marginLeft: '44vw', fontFamily:'Roboto'}} onClick={handleSearch}>Search</Button>
+            <input placeholder='Search Gifts' 
+            style={{borderRadius: '10px', marginLeft:'35vw', width:'200px', marginBottom:'20px', fontFamily:'Roboto'}} 
+            id='name' onChange={e => setName(e.target.value)} />
+            <ItemsTable></ItemsTable>
+            <Button id='search' style={{marginLeft: '44vw', fontFamily:'Roboto'}} onClick={handleSearch}>Search</Button>
             <br />
-            {name ? <ReviewsSearch rev={rev} /> : <ReviewsList userId={userId} fetchReviews={fetchReviews} reviews={reviews} />} */}
+            {/* {name ? <GiftsSearch rev={rev} /> : 
+            <GiftsList userId={userId} fetchReviews={fetchGifts} reviews={reviews} />} */}
             </Router>
           </div>
   );
 }
 
 export default App;
+
+
+//add in "reviews.js" file
