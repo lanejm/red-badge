@@ -46,3 +46,5 @@ const ItemsTable = (props: any) => {
 }
 
 export default ItemsTable
+
+//autofill with today's date
