@@ -4,22 +4,30 @@ import Auth from './components/Auth/Auth';
 import NavFile from './components/Navbar/Navbar';
 import GiftsCreate from './components/Gifts/Create';
 import GiftsList from './components/Gifts/List';
-import GiftsSearch from './components/Gifts/Search';
+// import GiftsSearch from './components/Gifts/Search';
 import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import {Button} from 'reactstrap';
 import ItemsTable from './components/Gifts/Items';
 
 function App() {
 
-    const [sessionToken, setSessionToken] = useState(undefined);
-    const [userId, setUserId] = useState(undefined);
-    const [reviews, setReviews] = useState([])
+    const [sessionToken, setSessionToken] = useState<string>('');
+    const [userId, setUserId] = useState<number | undefined>(undefined);
+    const [gifts, setGifts] = useState([])
     const [rev, setRev] = useState([])
     const [name, setName] = useState('')
+    const [giftName, setGiftName] = useState('')
+    const [description, setDescription] = useState('')
+    const [date, setDate] = useState('')
+    const [purchased, setPurchased] = useState('')
+    const [person, setPerson] = useState('')
+    const [from, setFrom] = useState('')
+    const [owner, setOwner] = useState('')
+    const [price, setPrice] = useState('')
 
     
     const handleSearch = () => {
-      fetch(`http://localhost:8081/gifts/name/${name}`, {
+      fetch(`http://localhost:8081/gifts/${name}`, {
           method: 'GET',
       }).then(r => r.json())
         .then(rArr => setRev(rArr))
@@ -30,8 +38,19 @@ function App() {
       fetch(`http://localhost:8081/gifts`, {
           method: 'GET'
       }).then(r => r.json())
-        .then(rArr => setReviews(rArr))
-    }
+        .then(rArr => setGifts(rArr))
+    } //showing in console, not displaying to DOM.
+
+    useEffect(
+      () => {
+        const token = localStorage.getItem('token')
+        if (token) {
+          setSessionToken(token)
+          // setUserId(parseInt(localStorage.getItem('id')))  //parseInt makes user id an integer
+        }
+        handleSearch()
+      }, []
+    )
 
     
     const updateToken = (newToken: any, id: any) => {
@@ -43,7 +62,7 @@ function App() {
   
     const clearToken = () => {
     setUserId(undefined)
-    setSessionToken(undefined)
+    setSessionToken('')
     localStorage.clear()
   }
 
@@ -54,16 +73,44 @@ function App() {
               { !sessionToken ? <Auth updateToken={updateToken} /> :
               <Switch> 
                 <Route path="/create"> 
-                  <GiftsCreate  sessionToken={sessionToken} />
+                  <GiftsCreate 
+                   giftName={giftName}
+                   description={description} 
+                   date={date}
+                   purchased={purchased}
+                   person={person}
+                   from={from}
+                   owner={owner}
+                   price={price} 
+                  sessionToken={sessionToken} ></GiftsCreate>
                 </Route>
                 <Route path="/">
-                  {/* <ReviewsList userId={userId} fetchReviews={fetchReviews} /> */}
+                  <GiftsList 
+                   name={giftName}
+                   description={description} 
+                   date={date}
+                   purchased={purchased}
+                   person={person}
+                   from={from}
+                   owner={owner}
+                   price={price} 
+                  sessionToken={sessionToken} 
+                  {...fetchGifts} />
                 </Route>
               </Switch> }
             <input placeholder='Search Gifts' 
             style={{borderRadius: '10px', marginLeft:'35vw', width:'200px', marginBottom:'20px', fontFamily:'Roboto'}} 
             id='name' onChange={e => setName(e.target.value)} />
-            <ItemsTable></ItemsTable>
+            {/* <ItemsTable
+            giftName={giftName}
+             description={description} 
+             date={date}
+             purchased={purchased}
+             person={person}
+             from={from}
+             owner={owner}
+             price={price} 
+            sessionToken={sessionToken} /> */}
             <Button id='search' style={{marginLeft: '44vw', fontFamily:'Roboto'}} onClick={handleSearch}>Search</Button>
             <br />
             {/* {name ? <GiftsSearch rev={rev} /> : 

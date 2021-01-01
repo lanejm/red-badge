@@ -15,14 +15,14 @@ import {Button} from 'reactstrap';
 
 const GiftEdit = (props: any) => {
 
-    const [giftName, setGiftName] = useState(props.rev.giftName);
-    const [description, setDescription] = useState(props.rev.description);
-    const [date, setDate] = useState(props.rev.date);
-    const [purchased, setPurchased] = useState(props.rev.purchased);
-    const [person, setPerson] = useState(props.rev.person);
-    const [from, setFrom] = useState(props.rev.from);
-    const [owner, setOwner] = useState(props.rev.owner);
-    const [price, setPrice] = useState(props.rev.price);
+    const [giftName, setGiftName] = useState(props.giftName);
+    const [description, setDescription] = useState(props.description);
+    const [date, setDate] = useState(props.date);
+    const [purchased, setPurchased] = useState(props.purchased);
+    const [person, setPerson] = useState(props.person);
+    const [from, setFrom] = useState(props.from);
+    const [owner, setOwner] = useState(props.owner);
+    const [price, setPrice] = useState(props.price);
     const history = useHistory()
 
     const [showEdit, setShowEdit] = useState(false);

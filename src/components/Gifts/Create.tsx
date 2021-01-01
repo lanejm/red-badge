@@ -1,10 +1,26 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import {Button, Alert} from 'reactstrap';
+import {Button, Alert, CardBody} from 'reactstrap';
 import  '../Gifts/create.css'
+import GiftsList from './List';
 
+interface GiftCreateProp {
+    giftName: string;
+    description: string;
+    date: string;
+    purchased: string;
+    person: string;
+    from: string;
+    owner: string;
+    price: string;
+    sessionToken: string;
+}
 
-const GiftsCreate = (props: any) => {
+interface sessionToken {
+    sessionToken: string;
+}
+
+const GiftsCreate: React.FC<GiftCreateProp> = () => {
 
     const [giftName, setGiftName] = useState('')
     const [description, setDescription] = useState('')
@@ -14,6 +30,9 @@ const GiftsCreate = (props: any) => {
     const [from, setFrom] = useState('')
     const [owner, setOwner] = useState('')
     const [price, setPrice] = useState('')
+    const [sessionToken, setSessionToken] = useState<string>('');
+    const history = useHistory()
+    const [gifts, setGifts] = useState('')
 
     const resetForm = (e: any) => {
         setGiftName('')
@@ -25,6 +44,13 @@ const GiftsCreate = (props: any) => {
         setOwner('')
         setPrice('')
     }
+
+    const fetchGifts = () => {
+        fetch(`http://localhost:8081/gifts`, {
+            method: 'GET'
+        }).then(r => r.json())
+          .then(rArr => setGifts(rArr))
+      }
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
@@ -42,20 +68,22 @@ const GiftsCreate = (props: any) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': props.sessionToken
+                'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjA5NDU4MTg3LCJleHAiOjE2MDk1NDQ1ODd9.hkww-XdJSJCws6OD4bkrFqGT094msZd53fof9AQaK2c'
             },
+            // figure out how to get dynamic sessionToken
             body: JSON.stringify(body)
         }).then(r => r.json())
         .then(rObj => {
             console.log(rObj)
-            resetForm(null)
-            // history.push('/')
-            // props.fetchGifts
+            resetForm('null')
+            history.push('/')
+            fetchGifts()
         })
     }
 
     return (
         <div>
+            {/* form for input */}
             <form id='createGift' className='createGift'>
                 <label htmlFor='giftName'>Gift Name: </label>
                 <input placeholder='Ex: Necktie'  id='giftName' value={giftName} onChange={e => setGiftName(e.target.value)} required/>
@@ -82,11 +110,22 @@ const GiftsCreate = (props: any) => {
                 <input placeholder='Ex: $200' id='price' value={price} onChange={e => setPrice(e.target.value)} required/>
                 <br />
                 <Button color='secondary' style={{marginLeft: '20px'}} id='resetForm' onClick={resetForm} type='button'>Reset Gift Form</Button>
-                <Button color='success' style={{marginLeft: '15px'}} id="submitReview" onClick={handleSubmit} type="submit" >Submit Gift!</Button>
+                <Button color='success' style={{marginLeft: '15px'}} id="submitGift" onClick={handleSubmit} type="submit" >Submit Gift!</Button>
                 {/* <Alert color="success">Gift submitted!</Alert> */}
             </form>
             <br />
-            {/* <ReviewsList /> */}
+            {/* <GiftsList
+            name={giftName}
+            description={description} 
+            date={date}
+            purchased={purchased}
+            person={person}
+            from={from}
+            owner={owner}
+            price={price} 
+           sessionToken={sessionToken}
+             /> */}
+             
         </div>
     )
 }
