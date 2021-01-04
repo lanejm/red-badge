@@ -8,6 +8,7 @@ import GiftsList from './components/Gifts/List';
 import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import {Button} from 'reactstrap';
 import ItemsTable from './components/Gifts/Items';
+import {SignUp} from './components/Auth/LoginRegister/SignUpForm';
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
 
     
     const handleSearch = () => {
-      fetch(`http://localhost:8081/gifts/${name}`, {
+      fetch(`http://localhost:8081/gifts/${giftName}`, {
           method: 'GET',
       }).then(r => r.json())
         .then(rArr => setRev(rArr))
@@ -68,39 +69,20 @@ function App() {
 
   return (
     <div className='App'>
-            <Router>
-              <NavFile clearToken={clearToken} />
-              { !sessionToken ? <Auth updateToken={updateToken} /> :
+      <SignUp/>
+            {/* <Router>
+              {/* <NavFile clearToken={clearToken} /> */}
+              {/* { !sessionToken ? <Auth updateToken={updateToken} /> :
               <Switch> 
                 <Route path="/create"> 
-                  <GiftsCreate 
-                   giftName={giftName}
-                   description={description} 
-                   date={date}
-                   purchased={purchased}
-                   person={person}
-                   from={from}
-                   owner={owner}
-                   price={price} 
-                  sessionToken={sessionToken} ></GiftsCreate>
                 </Route>
                 <Route path="/">
-                  <GiftsList 
-                   name={giftName}
-                   description={description} 
-                   date={date}
-                   purchased={purchased}
-                   person={person}
-                   from={from}
-                   owner={owner}
-                   price={price} 
-                  sessionToken={sessionToken} 
-                  {...fetchGifts} />
+
                 </Route>
-              </Switch> }
-            <input placeholder='Search Gifts' 
+              </Switch> } */} 
+            {/* <input placeholder='Search Gifts' 
             style={{borderRadius: '10px', marginLeft:'35vw', width:'200px', marginBottom:'20px', fontFamily:'Roboto'}} 
-            id='name' onChange={e => setName(e.target.value)} />
+            id='name' onChange={e => setName(e.target.value)} /> */}
             {/* <ItemsTable
             giftName={giftName}
              description={description} 
@@ -111,11 +93,11 @@ function App() {
              owner={owner}
              price={price} 
             sessionToken={sessionToken} /> */}
-            <Button id='search' style={{marginLeft: '44vw', fontFamily:'Roboto'}} onClick={handleSearch}>Search</Button>
+            {/* <Button id='search' style={{marginLeft: '44vw', fontFamily:'Roboto'}} onClick={handleSearch}>Search</Button> */}
             <br />
             {/* {name ? <GiftsSearch rev={rev} /> : 
             <GiftsList userId={userId} fetchReviews={fetchGifts} reviews={reviews} />} */}
-            </Router>
+            {/* </Router> */}
           </div>
   );
 }

@@ -77,9 +77,20 @@ const GiftsCreate: React.FC<GiftCreateProp> = () => {
             console.log(rObj)
             resetForm('null')
             history.push('/')
-            fetchGifts()
+            // fetchGifts()
         })
     }
+
+    let addGiftEntry = document.getElementById('submitGift')?.addEventListener("click", (rObj) => {
+        let giftName = document.getElementById('giftName');
+        let description = document.getElementById('description');
+        let date = document.getElementById('date');
+        let purchased = document.getElementById('purchased');
+        let person = document.getElementById('person');
+        let from = document.getElementById('from');
+        let owner = document.getElementById('owner');
+        let price = document.getElementById('price');
+    })
 
     return (
         <div>
@@ -114,6 +125,7 @@ const GiftsCreate: React.FC<GiftCreateProp> = () => {
                 {/* <Alert color="success">Gift submitted!</Alert> */}
             </form>
             <br />
+            {fetchGifts}
             {/* <GiftsList
             name={giftName}
             description={description} 
