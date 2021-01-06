@@ -19,7 +19,7 @@ interface GiftCreateProp {
 interface sessionToken {
     sessionToken: string;
 }
-
+//make this like items class
 const GiftsCreate: React.FC<GiftCreateProp> = () => {
 
     const [giftName, setGiftName] = useState('')
@@ -30,11 +30,11 @@ const GiftsCreate: React.FC<GiftCreateProp> = () => {
     const [from, setFrom] = useState('')
     const [owner, setOwner] = useState('')
     const [price, setPrice] = useState('')
-    const [sessionToken, setSessionToken] = useState<string>('');
+    const [sessionToken, setSessionToken] = useState('');
     const history = useHistory()
     const [gifts, setGifts] = useState('')
 
-    const resetForm = (e: any) => {
+    const resetForm = (e:any) => {
         setGiftName('')
         setDescription('')
         setDate('')
@@ -77,24 +77,23 @@ const GiftsCreate: React.FC<GiftCreateProp> = () => {
             console.log(rObj)
             resetForm('null')
             history.push('/')
-            // fetchGifts()
+            fetchGifts()
         })
     }
 
-    let addGiftEntry = document.getElementById('submitGift')?.addEventListener("click", (rObj) => {
-        let giftName = document.getElementById('giftName');
-        let description = document.getElementById('description');
-        let date = document.getElementById('date');
-        let purchased = document.getElementById('purchased');
-        let person = document.getElementById('person');
-        let from = document.getElementById('from');
-        let owner = document.getElementById('owner');
-        let price = document.getElementById('price');
-    })
+    // let addGiftEntry = document.getElementById('submitGift')?.addEventListener("click", (rObj) => {
+    //     let giftName = document.getElementById('giftName');
+    //     let description = document.getElementById('description');
+    //     let date = document.getElementById('date');
+    //     let purchased = document.getElementById('purchased');
+    //     let person = document.getElementById('person');
+    //     let from = document.getElementById('from');
+    //     let owner = document.getElementById('owner');
+    //     let price = document.getElementById('price');
+    // })
 
     return (
         <div>
-            {/* form for input */}
             <form id='createGift' className='createGift'>
                 <label htmlFor='giftName'>Gift Name: </label>
                 <input placeholder='Ex: Necktie'  id='giftName' value={giftName} onChange={e => setGiftName(e.target.value)} required/>
@@ -137,8 +136,8 @@ const GiftsCreate: React.FC<GiftCreateProp> = () => {
             price={price} 
            sessionToken={sessionToken}
              /> */}
-             
         </div>
+        
     )
 }
 

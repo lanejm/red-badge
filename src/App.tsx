@@ -12,8 +12,8 @@ import {SignUp} from './components/Auth/LoginRegister/SignUpForm';
 
 function App() {
 
-    const [sessionToken, setSessionToken] = useState<string>('');
-    const [userId, setUserId] = useState<number | undefined>(undefined);
+    const [sessionToken, setSessionToken] = useState('');
+    const [userId, setUserId] = useState('');
     const [gifts, setGifts] = useState([])
     const [rev, setRev] = useState([])
     const [name, setName] = useState('')
@@ -49,12 +49,12 @@ function App() {
           setSessionToken(token)
           // setUserId(parseInt(localStorage.getItem('id')))  //parseInt makes user id an integer
         }
-        handleSearch()
+        handleSearch() //outside of if statement so code is running
       }, []
     )
 
     
-    const updateToken = (newToken: any, id: any) => {
+    const updateToken = (newToken: string, id: any) => {
       setSessionToken(newToken)
       setUserId(id)
       localStorage.setItem('id', id)
@@ -62,42 +62,42 @@ function App() {
     }
   
     const clearToken = () => {
-    setUserId(undefined)
+    setUserId('')
     setSessionToken('')
     localStorage.clear()
   }
 
   return (
     <div className='App'>
-      <SignUp/>
-            {/* <Router>
-              {/* <NavFile clearToken={clearToken} /> */}
-              {/* { !sessionToken ? <Auth updateToken={updateToken} /> :
+            <Router>
+              <NavFile clearToken={clearToken} />  
+              { !sessionToken ? <Auth updateToken={updateToken} /> :
               <Switch> 
-                <Route path="/create"> 
+                <Route path="/create">
+                  <GiftsCreate 
+                    giftName={giftName}
+                    description={description} 
+                    date={date}
+                    purchased={purchased}
+                    person={person}
+                    from={from}
+                    owner={owner}
+                    price={price} 
+                    sessionToken={sessionToken}/> 
                 </Route>
                 <Route path="/">
 
                 </Route>
-              </Switch> } */} 
-            {/* <input placeholder='Search Gifts' 
+              </Switch> }
+            <input placeholder='Search Gifts' 
             style={{borderRadius: '10px', marginLeft:'35vw', width:'200px', marginBottom:'20px', fontFamily:'Roboto'}} 
-            id='name' onChange={e => setName(e.target.value)} /> */}
-            {/* <ItemsTable
-            giftName={giftName}
-             description={description} 
-             date={date}
-             purchased={purchased}
-             person={person}
-             from={from}
-             owner={owner}
-             price={price} 
-            sessionToken={sessionToken} /> */}
-            {/* <Button id='search' style={{marginLeft: '44vw', fontFamily:'Roboto'}} onClick={handleSearch}>Search</Button> */}
+            id='name' onChange={e => setName(e.target.value)} /> 
+            <ItemsTable 
+              userId = {userId}/> 
+            <Button id='search' onClick={handleSearch}>Search</Button>
             <br />
-            {/* {name ? <GiftsSearch rev={rev} /> : 
-            <GiftsList userId={userId} fetchReviews={fetchGifts} reviews={reviews} />} */}
-            {/* </Router> */}
+            {/* <GiftsList userId={userId} fetchGifts={fetchGifts} gifts={gifts} /> */}
+            </Router>
           </div>
   );
 }

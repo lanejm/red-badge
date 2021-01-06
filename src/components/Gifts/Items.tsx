@@ -1,13 +1,17 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import GiftEdit from './Edit';
 import GiftsList from './List';
 import {
     Card, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Row, Col
-  } from 'reactstrap';
+} from 'reactstrap';
 
 
-type ItemsProp = {
+interface ItemsProp {
+    userId: string
+}
+
+interface ItemsState {
     giftName: string;
     description: string;
     date: string;
@@ -17,50 +21,70 @@ type ItemsProp = {
     owner: string;
     price: string;
     sessionToken: string;
+    setGifts: [];
+    userId: string
 }
 
-class ItemsTable extends React.Component<ItemsProp> {
-    constructor(props:ItemsProp){
-        super (props)
+class ItemsTable extends React.Component<ItemsProp, ItemsState> {
+    constructor(props: ItemsProp) {
+        super(props)
+        this.state = {
+            giftName: 'gift',
+            description: 'description',
+            date: 'date',
+            purchased: 'purchased',
+            person: 'person',
+            from: 'from',
+            owner: 'owner',
+            price: 'price',
+            sessionToken: 'sessionToken',
+            userId: 'userId',
+            setGifts: []
+        }
     }
-
-    state = {
-        giftName: 'gift',
-        description: 'description',
-        date: 'date',
-        purchased: 'purchased',
-        person: 'person',
-        from: 'from',
-        owner: 'owner',
-        price: 'price',
-        userId: 'userId',
-        setGifts: []
-    }
-    
-    render () {
-
-    const fetchGifts = () => {
+    fetchGifts = () => {
         fetch(`http://localhost:8081/gifts`, {
             method: 'GET'
         }).then(r => r.json())
-          .then(rArr => this.setState(rArr))
-      }
+            .then(rArr => this.setState({
+                setGifts: rArr
+            }))
+    }
 
-    const deleteItems = () => {
-        fetch(`http://localhost:8081/gifts/${this.state.userId}`, {
+    deleteItems = () => {
+        fetch(`http://localhost:8081/gifts/${this.props.userId}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': 'token'
             })
-        }).then(() => fetchGifts())
+        }).then(() => this.fetchGifts())
     }
-    return (
-        <div>
-            <button onClick={fetchGifts}>Show my gifts!</button>
-        </div>
-    )
-    }}
+    displayItems = () => {
+        return this.state.setGifts?.map((item, index) => {
+            console.log(item, index)
+            return (
+                <div></div>
+            )
+        }) 
+
+    
+    }
+    render() {
+        return (
+            <div>
+                <button onClick={this.fetchGifts}>Show my gifts!</button>
+                <p>
+                    {this.fetchGifts}
+                    {this.state.description} 
+                    {/* showing as text only */}
+                </p>
+            </div>
+        )
+    }
+}
+
+
 
 export default ItemsTable;
 

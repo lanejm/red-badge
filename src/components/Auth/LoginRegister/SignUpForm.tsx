@@ -131,9 +131,9 @@ export class SignUp extends React.Component <LoginProps, LoginState> {
                     </form>
                 </div>
                 
-                <div id="forgot">
+                {/* <div id="forgot">
                     <a href="">forgot password?</a>
-                </div>
+                </div> */}
             </div>
            
         </div>

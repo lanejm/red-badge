@@ -12,7 +12,9 @@ interface GiftsProps {
     owner: string,
     price: string,
     sessionToken: string,
+    userId?: number
 }
+//make this like items class
 const GiftsList: React.FC<GiftsProps> = () => {
 
     const [gifts, setGifts] = useState([])
@@ -24,7 +26,7 @@ const GiftsList: React.FC<GiftsProps> = () => {
     const [from, setFrom] = useState('')
     const [owner, setOwner] = useState('')
     const [price, setPrice] = useState('')
-    const [sessionToken, setSessionToken] = useState<string>('');
+    const [sessionToken, setSessionToken] = useState('');
     
 
     useEffect(
@@ -45,16 +47,8 @@ const GiftsList: React.FC<GiftsProps> = () => {
     return (
         <div className="listItem">
             {/* {props.gifts.map((revObj: string, i:any) => <ItemsTable fetchGifts={props.fetchGifts} rev={revObj} key={i} userId={userId} />)} */}
-            <ItemsTable 
-             giftName={giftName}
-             description={description} 
-             date={date}
-             purchased={purchased}
-             person={person}
-             from={from}
-             owner={owner}
-             price={price} 
-            sessionToken={sessionToken} />
+            {/* <ItemsTable 
+              userId = {userId}/>  */}
         </div>
     )
 }
