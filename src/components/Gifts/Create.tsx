@@ -68,7 +68,7 @@ const GiftsCreate: React.FC<GiftCreateProp> = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjA5NDU4MTg3LCJleHAiOjE2MDk1NDQ1ODd9.hkww-XdJSJCws6OD4bkrFqGT094msZd53fof9AQaK2c'
+                'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjEwMDU5MjU1LCJleHAiOjE2MTAxNDU2NTV9.HBaRk9xH7aT1evT8Ed_O4CDSFKo1UltCTOyvD19u9-w'
             },
             // figure out how to get dynamic sessionToken
             body: JSON.stringify(body)
@@ -124,7 +124,7 @@ const GiftsCreate: React.FC<GiftCreateProp> = () => {
                 {/* <Alert color="success">Gift submitted!</Alert> */}
             </form>
             <br />
-            {fetchGifts}
+            {/* {fetchGifts} */}
             {/* <GiftsList
             name={giftName}
             description={description} 

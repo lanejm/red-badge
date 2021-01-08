@@ -35,12 +35,12 @@ function App() {
   }
 
     
-    const fetchGifts = () => {
-      fetch(`http://localhost:8081/gifts`, {
-          method: 'GET'
-      }).then(r => r.json())
-        .then(rArr => setGifts(rArr))
-    } //showing in console, not displaying to DOM.
+    // const fetchGifts = () => {
+    //   fetch(`http://localhost:8081/gifts`, {
+    //       method: 'GET'
+    //   }).then(r => r.json())
+    //     .then(rArr => setGifts(rArr))
+    // } //showing in console, not displaying to DOM.
 
     useEffect(
       () => {
@@ -49,7 +49,7 @@ function App() {
           setSessionToken(token)
           // setUserId(parseInt(localStorage.getItem('id')))  //parseInt makes user id an integer
         }
-        handleSearch() //outside of if statement so code is running
+        // handleSearch() //outside of if statement so code is running
       }, []
     )
 
