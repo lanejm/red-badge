@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Button } from 'reactstrap'
 
+//change to class component
 const Auth = (props: any) => {
 
     const [firstName, setFirstName] = useState('')
@@ -24,18 +25,19 @@ const Auth = (props: any) => {
             password: password
         }
         if (password.length > 8) {
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }).then(r => r.json())
-        .then(rObj => props.updateToken(rObj.sessionToken, rObj.user.id))
-    } else {
-        window.alert("Password must be at least 8 characters")
-    }}
-    
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(r => r.json())
+                .then(rObj => props.updateToken(rObj.sessionToken, rObj.user.id))
+        } else {
+            window.alert("Password must be at least 8 characters")
+        }
+    }
+
 
     const signupFields = () => {
         if (login) {
@@ -44,11 +46,11 @@ const Auth = (props: any) => {
             return (
                 <div>
                     <label htmlFor="firstName">First Name</label>
-                    <br/>
+                    <br />
                     <input id="firstName" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                    <br/>
+                    <br />
                     <label htmlFor="lastName">Last Name</label>
-                    <br/>
+                    <br />
                     <input id="lastName" value={lastName} onChange={e => setLastName(e.target.value)} />
                 </div>
             )
@@ -57,19 +59,19 @@ const Auth = (props: any) => {
 
     return (
         <form>
-            <h1>{login ? 'Login' : 'Register' }</h1>
+            <h1>{login ? 'Login' : 'Register'}</h1>
             <label htmlFor="email">Email</label>
-            <br/>
+            <br />
             <input id="email" value={email} onChange={e => setEmail(e.target.value)} />
-            <br/>
+            <br />
             <label htmlFor="password">Password</label>
-            <br/>
+            <br />
             <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} />
-            <br/>
+            <br />
             {signupFields()}
-            <br/>
+            <br />
             <Button type='button' onClick={loginToggle}>
-                {login ? "Click Here to Register" : "Click Here to Login"} 
+                {login ? "Click Here to Register" : "Click Here to Login"}
             </Button>
             <Button onClick={handleSubmit} type='submit'>Submit</Button>
         </form>
@@ -79,3 +81,5 @@ const Auth = (props: any) => {
 export default Auth
 
 //reactstrap form?
+
+//login is not showing gift list based on id.

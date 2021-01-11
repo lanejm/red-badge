@@ -1,15 +1,18 @@
-import React, { Fragment, useState } from 'react';
-import GiftEdit from './Edit';
-import GiftsList from './List';
+import React from 'react';
+// import GiftEdit from './Edit';
+// import GiftsList from './List';
 import {
-    Card, CardHeader, CardColumns, CardFooter, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Row, Col, Container, CardDeck
-} from 'reactstrap';
+    Card, CardHeader, CardFooter, CardBody,CardSubtitle, Row, Col, Button } from 'reactstrap';
 import '../Gifts/items.css';
 
 
 interface ItemsProp {
-    userId: string
+    userId: string;
+    sessionToken: string;
+    owner: string;
+    giftName: string;
+    isLoggedIn: boolean;
+    // id: number 
 }
 
 interface ItemsState {
@@ -23,7 +26,7 @@ interface ItemsState {
     price: string;
     sessionToken: string;
     setGifts: [];
-    userId: string
+    userId: string;
 }
 
 class ItemsTable extends React.Component<ItemsProp, ItemsState> {
@@ -40,42 +43,37 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
             price: 'price',
             sessionToken: 'sessionToken',
             userId: 'userId',
-            setGifts: []
+            setGifts: [],
         }
     }
     fetchGifts = () => {
-        fetch(`http://localhost:8081/gifts`, {
-            method: 'GET'
+        fetch(`http://localhost:8081/gifts/${localStorage.getItem('id')}`, {
+            method: 'GET',
+            headers: {
+                // 'Content-Type': 'application/json',
+                // 'Authorization': this.props.sessionToken
+            }
         }).then(r => r.json())
             .then(rArr => {
                 this.setState({
                     setGifts: rArr
                 })
-                console.log(this.state.setGifts)
+                // console.log(this.state.setGifts)
             })
 
     }
 
-    // fetchGifts2 = async() => {
-    //     const response = await fetch(`http://localhost:8081/gifts`, {
-    //         method: 'GET'
-    //     })
-    //     const json = await response.json()
-    //     this.setState({
-    //         setGifts: json
-    //     })
-    // }
-
-
-    // deleteItems = () => {
-    //     fetch(`http://localhost:8081/gifts/${this.props.userId}`, {
-    //         method: 'DELETE',
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': 'token'
-    //         })
-    //     }).then(() => this.fetchGifts())
-    // }
+    deleteItems = (item: number) => {
+        fetch(`http://localhost:8081/gifts/delete/${item}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': this.props.sessionToken
+            })
+            
+        }).then(() => this.fetchGifts())
+        console.log('item deleted')
+    }
     componentDidMount() {
         this.fetchGifts()
     }
@@ -84,12 +82,13 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
         return (
             <div >
                 <Row className="testing">{this.state.setGifts?.map((item: any, index) => {
-                    console.log(item, index)
+                    
                     return (
-                        <Col sm="4">
-                        <Card className="cards" key={item.id}>
+                        <Col className="card-column" sm="3">
+                        <Card className="cards" key={item.id}
+                        onMouseEnter={() => {console.log(item.id)}}>
                             <CardHeader className="item-name"tag="h2">{item.giftName}</CardHeader>
-                            <CardBody>
+                            <CardBody className="card-text">
                                 <CardSubtitle tag="h6" >{item.description}</CardSubtitle>
                                 <CardSubtitle tag="h6" >{item.purchased}</CardSubtitle>
                                 <CardSubtitle tag="h6" >{item.description}</CardSubtitle>
@@ -99,6 +98,10 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                 <CardSubtitle tag="h6" >{item.price}</CardSubtitle>
                             </CardBody>
                             <CardFooter>Date Purchased: {item.date}</CardFooter>
+                            <br/>
+                            {/* {this.props.owner === this.props.giftName ? */}
+                            {true?
+                            <Button color="danger" id="deleteReview" onClick={e => window.confirm("Are you sure you want to delete this item?") && this.deleteItems(item.id)}>{this.deleteItems}Delete</Button> : <div></div> }
                         </Card>
                         </Col>)
                 })}
@@ -112,9 +115,13 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
 render() {
     return (
         <div>
+        {this.props.isLoggedIn ?
+        <div>
             {this.displayItems()}
+            
         </div>
-
+        : null}
+        </div>
     )
 }
 }
@@ -126,4 +133,6 @@ export default ItemsTable;
 
 //need to render after clicking create gift entry button
 //style cards - alphabetical order?, hover, search
+
+//delete not deleting on front end. 
 

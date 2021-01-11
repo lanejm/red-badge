@@ -1,14 +1,48 @@
-import React from 'react';
-import ItemsTable from './Items';
+import * as React from 'react';
+import { Component } from 'react';
 
+export interface SearchProps {
+    giftName?: string;
+}
 
-// const GiftsSearch = ({}) => { 
+export interface SearchState {
+    giftName?: string;
+    setGiftsName: []
+}
 
-//     return (
-//         <div>
-//             {props.rev.map((revObj: any, i: any) => <ItemsTable key={i} userId={userId} />)}
-//         </div>
-//     )
-// }
+class Search extends React.Component<SearchProps, SearchState> {
+    constructor(props: SearchProps) {
+        super(props);
+        this.state = {
+            giftName: 'gift',
+            setGiftsName: []
 
-// export default GiftsSearch
+        };
+    }
+
+        fetchGiftsName = () => {
+            fetch(`http://localhost:8081/gifts/${this.props.giftName}`, {
+                method: 'GET'
+            }).then(r => r.json())
+                .then(rArr => {
+                    this.setState({
+                        setGiftsName: rArr
+                    })
+                    // console.log(this.state.setGifts)
+                })
+
+        }
+
+        componentDidMount() {
+            this.fetchGiftsName()
+        }
+        render() {
+            return (
+                <div>
+                    {this.props.giftName}
+                </div>
+            );
+        }
+    }
+
+    export default Search;
