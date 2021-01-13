@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import Auth from './components/Auth/Auth';
 import NavFile from './components/Navbar/Navbar';
 import GiftsCreate from './components/Gifts/Create';
 // import GiftsList from './components/Gifts/List';
 import Search from './components/Gifts/Search';
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import ItemsTable from './components/Gifts/Items';
 
@@ -97,7 +97,7 @@ class App extends React.Component<{}, State> {
   // }
 
   updateToken = (newToken: string, id: any) => {
-    this.setState({sessionToken: newToken, userId: id, isLoggedIn: true})
+    this.setState({ sessionToken: newToken, userId: id, isLoggedIn: true })
     localStorage.setItem('id', id)
     localStorage.setItem('token', newToken)
   }
@@ -114,9 +114,11 @@ class App extends React.Component<{}, State> {
     return (
       <div className='App' >
         <Router>
-          <NavFile clearToken={this.state.clearToken} />
-          {!this.state.isLoggedIn ? <Auth updateToken={this.updateToken} /> :
             <Switch>
+              <NavFile 
+              clearToken={this.state.clearToken}
+              isLoggedIn={this.state.isLoggedIn}
+              />
               <Route path="/create">
                 <GiftsCreate
                   giftName={this.state.giftName}
@@ -130,21 +132,21 @@ class App extends React.Component<{}, State> {
                   sessionToken={this.state.sessionToken} />
               </Route>
               <Route path="/">
-
+              {this.state.isLoggedIn ? <Redirect to="/create" /> : <Auth updateToken={this.updateToken} /> }
               </Route>
-            </Switch>}
-            <Button onClick={()=>{this.setState({isLoggedIn: true})}}></Button>
-          {this.state.isLoggedIn ? 
+            </Switch>
+          {/* <Button onClick={() => { this.setState({ isLoggedIn: true }) }}>Test</Button> */}
+          {this.state.isLoggedIn ?
             <ItemsTable
               isLoggedIn={this.state.isLoggedIn}
               giftName={this.state.giftName}
               owner={this.state.owner}
               sessionToken={this.state.sessionToken}
               userId={this.state.userId} />
-              : null
+            : null
           }
           <Button id='search' onClick={this.handleSearch}>Search</Button>
-          <Search />
+          {/* <Search /> */}
 
           <br />
           {/* <GiftsList userId={userId} fetchGifts={fetchGifts} gifts={gifts} /> */}

@@ -20,29 +20,29 @@ class Search extends React.Component<SearchProps, SearchState> {
         };
     }
 
-        fetchGiftsName = () => {
-            fetch(`http://localhost:8081/gifts/${this.props.giftName}`, {
-                method: 'GET'
-            }).then(r => r.json())
-                .then(rArr => {
-                    this.setState({
-                        setGiftsName: rArr
-                    })
-                    // console.log(this.state.setGifts)
+    fetchGiftsName = () => {
+        fetch(`http://localhost:8081/gifts/${this.props.giftName}`, {
+            method: 'GET'
+        }).then(r => r.json())
+            .then(rArr => {
+                this.setState({
+                    setGiftsName: rArr
                 })
+                // console.log(this.state.setGifts)
+            })
 
-        }
-
-        componentDidMount() {
-            this.fetchGiftsName()
-        }
-        render() {
-            return (
-                <div>
-                    {this.props.giftName}
-                </div>
-            );
-        }
     }
 
-    export default Search;
+    componentDidMount() {
+        this.fetchGiftsName()
+    }
+    render() {
+        return (
+            <div>
+                {this.props.giftName}
+            </div>
+        );
+    }
+}
+
+export default Search;
