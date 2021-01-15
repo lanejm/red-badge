@@ -12,7 +12,8 @@ interface ItemsProp {
     owner: string;
     giftName: string;
     isLoggedIn: boolean;
-    // id: number 
+    fetchGifts: () => void;
+    setGifts: any;
 }
 
 interface ItemsState {
@@ -25,7 +26,6 @@ interface ItemsState {
     owner: string;
     price: string;
     sessionToken: string;
-    setGifts: [];
     userId: string;
 }
 
@@ -43,25 +43,10 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
             price: 'price',
             sessionToken: 'sessionToken',
             userId: 'userId',
-            setGifts: [],
+            
         }
     }
-    fetchGifts = () => {
-        fetch(`http://localhost:8081/gifts/${localStorage.getItem('id')}`, {
-            method: 'GET',
-            headers: {
-                // 'Content-Type': 'application/json',
-                // 'Authorization': this.props.sessionToken
-            }
-        }).then(r => r.json())
-            .then(rArr => {
-                this.setState({
-                    setGifts: rArr
-                })
-                // console.log(this.state.setGifts)
-            })
-
-    }
+   
 
     deleteItems = (item: number) => {
         fetch(`http://localhost:8081/gifts/delete/${item}`, {
@@ -71,17 +56,17 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                 'Authorization': this.props.sessionToken
             })
             
-        }).then(() => this.fetchGifts())
+        }).then(() => this.props.fetchGifts())
         console.log('item deleted')
     }
     componentDidMount() {
-        this.fetchGifts()
+        this.props.fetchGifts()
     }
 
     displayItems() {
         return (
             <div >
-                <Row className="testing">{this.state.setGifts?.map((item: any, index) => {
+                <Row className="testing">{this.props.setGifts?.map((item: any, index: any) => {
                     
                     return (
                         <Col className="card-column" sm="3">

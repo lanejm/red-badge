@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { PassThrough } from 'stream';
 import '../Gifts/create.css'
 import GiftsList from './List';
 
@@ -14,7 +15,10 @@ interface GiftCreateProp {
     owner: string;
     price: string;
     sessionToken: string;
-    
+    showCreate: boolean;
+    setShowCreate: (e:any) => void;
+    fetchGifts: () => void;
+
 }
 
 interface GiftCreateState {
@@ -26,18 +30,9 @@ interface GiftCreateState {
     from: string;
     owner: string;
     price: string;
-    sessionToken: string;
     setGifts: [];
     userId: string;
     modal: boolean;
-    toggle: boolean
-}
-
-interface ModalProps {
-    isShown: boolean;
-    hide: () => void;
-    modalContent: JSX.Element;
-    headerText: string;
 }
 
 //make this like items class
@@ -45,21 +40,19 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
     constructor(props: GiftCreateProp) {
         super(props)
         this.state = {
-            giftName: 'gift',
-            description: 'description',
-            date: 'date',
-            purchased: 'purchased',
-            person: 'person',
-            from: 'from',
-            owner: 'owner',
-            price: 'price',
-            sessionToken: 'sessionToken',
-            userId: 'userId',
+            giftName: '',
+            description: '',
+            date: '',
+            purchased: '',
+            person: '',
+            from: '',
+            owner: '',
+            price: '',
+            userId: '',
             setGifts: [],
             modal: false,
-            toggle: true
         }
-       
+
     }
     // resetForm() {
     //     this.setState = {
@@ -68,33 +61,23 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
     //     }
     // }
 
-    fetchGifts = () => {
-        fetch(`http://localhost:8081/gifts`, {
-            method: 'GET'
-        }).then(r => r.json())
-            .then(rArr => {
-                this.setState({
-                    setGifts: rArr
-                })
-            })
-    }
-    handleSubmit = (e: GiftCreateProp) => {
+
+    handleSubmit = () => {
         const body = {
-            giftName: 'Gift',
-            description: 'description',
-            date: 'date',
-            purchased: 'purchased',
-            person: 'person',
-            from: 'from',
-            owner: 'owner',
-            price: 'price',
-            sessionToken: 'sessionToken',
+            giftName: this.state.giftName,
+            description: this.state.description,
+            date: this.state.date,
+            purchased: this.state.purchased,
+            person: this.state.person,
+            from: this.state.from,
+            owner: this.state.owner,
+            price: this.state.price,
         }
         fetch('http://localhost:8081/gifts/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': this.props.sessionToken
+                'Authorization': localStorage.getItem('token') || ''
             },
             // figure out how to get dynamic sessionToken
             body: JSON.stringify(body)
@@ -103,94 +86,102 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                 console.log(rObj)
                 // this.resetForm()
                 // history.push('/')
-                this.fetchGifts()
+                this.props.fetchGifts()
+                this.props.setShowCreate(false)
             })
     }
 
-   componentDidMount() {
-       ontoggle = () => (!Modal)
-   }
-
+    // componentDidMount() {
+    //     ontoggle = () => (!Modal)
+    // }
+    toggle = () => {
+        this.props.setShowCreate(false)
+       
+    }
+    handleChange = (e:any) => {
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        })
+    }
 
     render() {
         return (
-            <div>
-                <Button color="success" onclick={ontoggle}>Launch Modal</Button>
-                <Modal isOpen={this.state.modal} onclick={this.state.toggle} >
-                    <ModalHeader MouseEvent={this.state.toggle}>Create Gift</ModalHeader>
+                <Modal isOpen={this.props.showCreate} toggle={this.toggle} >
+                    <ModalHeader>Create Gift</ModalHeader>
                     <ModalBody>
                         <form id='createGift' className='createGift'>
                             <label htmlFor='giftName'>Gift Name: </label>
-                            <input placeholder='Ex: Necktie' id='giftName' value={this.props.giftName} onChange={e => this.state.giftName} required />
+                            <input name='giftName' placeholder='Ex: Necktie' id='giftName' value={this.state.giftName} onChange={e => this.handleChange(e)} required />
                             <br />
                             <label htmlFor='description'>Description: </label>
-                            <input placeholder='Write a brief description' id='description' value={this.props.description} onChange={e => this.state.description} />
+                            <input name='description' placeholder='Write a brief description' id='description' value={this.state.description} onChange={e => this.handleChange(e)} />
                             <br />
                             <label htmlFor='date'>Date: </label>
-                            <input placeholder='Ex: 12/25/2020' id='date' value={this.props.date} onChange={e => this.state.date} required />
+                            <input name='date' placeholder='Ex: 12/25/2020' id='date' value={this.state.date} onChange={e => this.handleChange(e)} required />
                             <br />
                             <label htmlFor='purchased'>Purchased: </label>
-                            <input placeholder='Where was this purchased?' id='purchased' value={this.props.purchased} onChange={e => this.state.purchased} />
+                            <input name='purchased' placeholder='Where was this purchased?' id='purchased' value={this.state.purchased} onChange={e => this.handleChange(e)} />
                             <br />
                             <label htmlFor='person'>Person: </label>
-                            <input placeholder='Who was this for?' id='person' value={this.props.person} onChange={e => this.state.person} required />
+                            <input name='person' placeholder='Who was this for?' id='person' value={this.state.person} onChange={e => this.handleChange(e)}required />
                             <br />
                             <label htmlFor='from'>From: </label>
-                            <input placeholder='Who was this from?' id='from' value={this.props.from} onChange={e => this.state.from} required />
+                            <input name='from' placeholder='Who was this from?' id='from' value={this.state.from} onChange={e => this.handleChange(e)} required />
                             <br />
                             <label htmlFor='owner'>Owner: </label>
-                            <input placeholder='Onwer of List' id='owner' value={this.props.owner} onChange={e => this.state.owner} required />
+                            <input name='owner' placeholder='Owner of List' id='owner' value={this.state.owner} onChange={e => this.handleChange(e)} required />
                             <br />
                             <label htmlFor='price'>Price: </label>
-                            <input placeholder='Ex: $200' id='price' value={this.props.price} onChange={e => this.state.price} required />
+                            <input name='price' placeholder='Ex: $200' id='price' value={this.state.price} onChange={e => this.handleChange(e)} required />
                         </form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color='secondary' style={{ marginLeft: '20px' }} id='resetForm'  type='button'>Reset Gift Form</Button>
-                        <Button color='success' style={{ marginLeft: '15px' }} id="submitGift" type="submit" >Submit Gift!</Button>
+                        <Button color='secondary' style={{ marginLeft: '20px' }} id='resetForm' type='button'>Reset Gift Form</Button>
+                        <Button color='success' style={{ marginLeft: '15px' }} id="submitGift" type="button" onClick={this.handleSubmit}>Submit Gift!</Button>
                     </ModalFooter>
                 </Modal>
-            </div>
+    
         )
     }
-        /* // return (
-        //     <div>
-                <form id='createGift' className='createGift'>
-                    <label htmlFor='giftName'>Gift Name: </label>
-                    <input placeholder='Ex: Necktie' id='giftName' value={this.giftName} onChange={e => this.state.giftName(e.target.value)} required />
-                    <br />
-                    <label htmlFor='description'>Description: </label>
-                    <input placeholder='Write a brief description' id='description' value={description} onChange={e => setDescription(e.target.value)} />
-                    <br />
-                    <label htmlFor='date'>Date: </label>
-                    <input placeholder='Ex: 12/25/2020' id='date' value={date} onChange={e => setDate(e.target.value)} required />
-                    <br />
-                    <label htmlFor='purchased'>Purchased: </label>
-                    <input placeholder='Where was this purchased?' id='purchased' value={purchased} onChange={e => setPurchased(e.target.value)} />
-                    <br />
-                    <label htmlFor='person'>Person: </label>
-                    <input placeholder='Who was this for?' id='person' value={person} onChange={e => setPerson(e.target.value)} required />
-                    <br />
-                    <label htmlFor='from'>From: </label>
-                    <input placeholder='Who was this from?' id='from' value={from} onChange={e => setFrom(e.target.value)} required />
-                    <br />
-                    <label htmlFor='owner'>Owner: </label>
-                    <input placeholder='Onwer of List' id='owner' value={owner} onChange={e => setOwner(e.target.value)} required />
-                    <br />
-                    <label htmlFor='price'>Price: </label>
-                    <input placeholder='Ex: $200' id='price' value={price} onChange={e => setPrice(e.target.value)} required />
-        //             <br />
-        //             <Button color='secondary' style={{ marginLeft: '20px' }} id='resetForm' onClick={this.resetForm} type='button'>Reset Gift Form</Button>
-        //             <Button color='success' style={{ marginLeft: '15px' }} id="submitGift" onClick={this.handleSubmit} type="submit" >Submit Gift!</Button>
-        //             {/* <Alert color="success">Gift submitted!</Alert> */
-            /* //         </form> */
-            /* //         <br />
-            //     </div > */
+    /* // return (
+    //     <div>
+            <form id='createGift' className='createGift'>
+                <label htmlFor='giftName'>Gift Name: </label>
+                <input placeholder='Ex: Necktie' id='giftName' value={this.giftName} onChange={e => this.state.giftName(e.target.value)} required />
+                <br />
+                <label htmlFor='description'>Description: </label>
+                <input placeholder='Write a brief description' id='description' value={description} onChange={e => setDescription(e.target.value)} />
+                <br />
+                <label htmlFor='date'>Date: </label>
+                <input placeholder='Ex: 12/25/2020' id='date' value={date} onChange={e => setDate(e.target.value)} required />
+                <br />
+                <label htmlFor='purchased'>Purchased: </label>
+                <input placeholder='Where was this purchased?' id='purchased' value={purchased} onChange={e => setPurchased(e.target.value)} />
+                <br />
+                <label htmlFor='person'>Person: </label>
+                <input placeholder='Who was this for?' id='person' value={person} onChange={e => setPerson(e.target.value)} required />
+                <br />
+                <label htmlFor='from'>From: </label>
+                <input placeholder='Who was this from?' id='from' value={from} onChange={e => setFrom(e.target.value)} required />
+                <br />
+                <label htmlFor='owner'>Owner: </label>
+                <input placeholder='Onwer of List' id='owner' value={owner} onChange={e => setOwner(e.target.value)} required />
+                <br />
+                <label htmlFor='price'>Price: </label>
+                <input placeholder='Ex: $200' id='price' value={price} onChange={e => setPrice(e.target.value)} required />
+    //             <br />
+    //             <Button color='secondary' style={{ marginLeft: '20px' }} id='resetForm' onClick={this.resetForm} type='button'>Reset Gift Form</Button>
+    //             <Button color='success' style={{ marginLeft: '15px' }} id="submitGift" onClick={this.handleSubmit} type="submit" >Submit Gift!</Button>
+    //             {/* <Alert color="success">Gift submitted!</Alert> */
+    /* //         </form> */
+    /* //         <br />
+    //     </div > */
 
 
 }
 
-    export default GiftsCreate
+export default GiftsCreate
 
 //make this a modal? 
 //notes entry

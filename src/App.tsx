@@ -8,7 +8,7 @@ import Search from './components/Gifts/Search';
 import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import ItemsTable from './components/Gifts/Items';
-
+import Logout from './components/Navbar/Logout/Logout';
 
 
 interface State {
@@ -26,6 +26,9 @@ interface State {
   updateToken: string;
   isLoggedIn: boolean;
   clearToken: any;
+  setIsLoggedIn: (e: any) => void;
+  showCreate: boolean;
+  setShowCreate: (e: any) => void;
 }
 
 // const clearToken = () => {
@@ -63,6 +66,17 @@ class App extends React.Component<{}, State> {
         this.setState({
           isLoggedIn: false
         })
+      },
+      setIsLoggedIn: (e) => {
+        this.setState({
+          isLoggedIn: e
+        })
+      },
+      showCreate: false,
+      setShowCreate: (e) => {
+        this.setState({
+          showCreate: e
+        })
       }
     }
   }
@@ -80,26 +94,41 @@ class App extends React.Component<{}, State> {
   }
 
   componentDidMount() {
-    if (this.state.sessionToken.length > 0) {
+    if (localStorage.getItem('token')) {
       this.setState({
-        // isLoggedIn: true
+        isLoggedIn: true
       })
-      localStorage.clear()
     }
   }
 
-  // clearToken() {
-  //   this.setState({
-  //     isLoggedIn:false
-  //   })
-  //   console.log("test of clear token")
-  //   localStorage.clear()
-  // }
+  clearToken() {
+    this.setState({
+      isLoggedIn: false
+    })
+    console.log("test of clear token")
+    localStorage.clear()
+  }
 
   updateToken = (newToken: string, id: any) => {
     this.setState({ sessionToken: newToken, userId: id, isLoggedIn: true })
     localStorage.setItem('id', id)
     localStorage.setItem('token', newToken)
+  }
+  fetchGifts = () => {
+    fetch(`http://localhost:8081/gifts/${localStorage.getItem('id')}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': this.state.sessionToken
+      }
+    }).then(r => r.json())
+      .then(rArr => {
+        this.setState({
+          setGifts: rArr
+        })
+        console.log(this.state.setGifts)
+      })
+
   }
 
 
@@ -114,30 +143,40 @@ class App extends React.Component<{}, State> {
     return (
       <div className='App' >
         <Router>
-            <Switch>
-              <NavFile 
+          <Switch>
+            <NavFile
               clearToken={this.state.clearToken}
               isLoggedIn={this.state.isLoggedIn}
-              />
-              <Route path="/create">
-                <GiftsCreate
-                  giftName={this.state.giftName}
-                  description={this.state.description}
-                  date={this.state.date}
-                  purchased={this.state.purchased}
-                  person={this.state.person}
-                  from={this.state.from}
-                  owner={this.state.owner}
-                  price={this.state.price}
-                  sessionToken={this.state.sessionToken} />
-              </Route>
-              <Route path="/">
-              {this.state.isLoggedIn ? <Redirect to="/create" /> : <Auth updateToken={this.updateToken} /> }
-              </Route>
-            </Switch>
+              setShowCreate={this.state.setShowCreate}
+            />
+            {/* <Logout 
+              clearToken={this.state.clearToken}/> */}
+            {/* <Route exact path="/create"> */}
+
+            {/* </Route> */}
+          </Switch>
+          <GiftsCreate
+            fetchGifts={this.fetchGifts}
+            showCreate={this.state.showCreate}
+            setShowCreate={this.state.setShowCreate}
+            giftName={this.state.giftName}
+            description={this.state.description}
+            date={this.state.date}
+            purchased={this.state.purchased}
+            person={this.state.person}
+            from={this.state.from}
+            owner={this.state.owner}
+            price={this.state.price}
+            sessionToken={this.state.sessionToken} />
+          {/* <Auth updateToken={this.updateToken} />  */}
+          {this.state.isLoggedIn === false ? <Auth
+            setIsLoggedIn={this.state.setIsLoggedIn}
+            updateToken={this.updateToken} /> : null}
           {/* <Button onClick={() => { this.setState({ isLoggedIn: true }) }}>Test</Button> */}
           {this.state.isLoggedIn ?
             <ItemsTable
+              fetchGifts={this.fetchGifts}
+              setGifts={this.state.setGifts}
               isLoggedIn={this.state.isLoggedIn}
               giftName={this.state.giftName}
               owner={this.state.owner}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Logout from './Logout/Logout';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Button } from 'reactstrap';
@@ -7,11 +7,12 @@ import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Button } from '
 interface NavProps {
   isLoggedIn: boolean;
   clearToken: any;
+  setShowCreate: (e:any) => void;
 }
 interface NavState {
   collapsed: boolean;
-  clearToken: any;
-  isLoggedIn: boolean;
+
+
 }
 
 class NavFile extends React.Component<NavProps, NavState> {
@@ -19,12 +20,7 @@ class NavFile extends React.Component<NavProps, NavState> {
     super(props);
     this.state = {
       collapsed: true,
-      isLoggedIn: false,
-      clearToken: () => {
-        this.setState({
-          isLoggedIn: false
-        })
-      }
+      
     }
   }
 
@@ -35,17 +31,22 @@ class NavFile extends React.Component<NavProps, NavState> {
   render() {
     return (
       <div>
-        <Navbar color="faced" light>
+        <Navbar color="faded" light>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
+              {this.props.isLoggedIn ? 
+              <>
               <NavItem>
-                <Link to="/create"><Button clasName="navButtons" color="success">Create Gift Entry</Button></Link>
+                <Link to="/create">
+                  <Button className="navButtons" color="success" onClick={() => this.props.setShowCreate(true)}>Create Gift Entry</Button>
+                  </Link>
               </NavItem>
               <NavItem>
                 <NavLink><Logout clearToken={this.props.clearToken} />
                 </NavLink>
               </NavItem>
+              </> : null }
             </Nav>
           </Collapse>
         </Navbar>

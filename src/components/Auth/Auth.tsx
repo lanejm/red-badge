@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { Button } from 'reactstrap'
+import Logout from '../Navbar/Logout/Logout';
 
 //change to class component
 
@@ -13,6 +14,7 @@ interface AuthProp {
     // login: boolean;
     updateToken: (newToken: string, id: any) => void;
     // e: any;
+    setIsLoggedIn: (e:any) => void
 }
 
 interface AuthState {
@@ -76,7 +78,10 @@ class Auth extends React.Component<AuthProp, AuthState> {
                 },
                 body: JSON.stringify(body)
             }).then(r => r.json())
-                .then(rObj => this.updateToken(rObj.sessionToken, rObj.user.id))
+                .then(rObj => {
+                    this.updateToken(rObj.sessionToken, rObj.user.id)
+                    this.props.setIsLoggedIn(true)
+                })
                 // this.setState({isLoggedIn:true})
         } else {
             window.alert("Password must be at least 8 characters")
