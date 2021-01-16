@@ -9,6 +9,7 @@ import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-d
 import { Button } from 'reactstrap';
 import ItemsTable from './components/Gifts/Items';
 import Logout from './components/Navbar/Logout/Logout';
+import GiftEdit from './components/Gifts/Edit';
 
 
 interface State {
@@ -29,6 +30,8 @@ interface State {
   setIsLoggedIn: (e: any) => void;
   showCreate: boolean;
   setShowCreate: (e: any) => void;
+  setShowEdit: (e:any) => void;
+  showEdit: boolean;
 }
 
 // const clearToken = () => {
@@ -49,16 +52,16 @@ class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props)
     this.state = {
-      giftName: 'gift',
-      description: 'description',
-      date: 'date',
-      purchased: 'purchased',
-      person: 'person',
-      from: 'from',
-      owner: 'owner',
-      price: 'price',
+      giftName: '',
+      description: '',
+      date: '',
+      purchased: '',
+      person: '',
+      from: '',
+      owner: '',
+      price: '',
       sessionToken: '',
-      userId: 'userId',
+      userId: '',
       setGifts: [],
       isLoggedIn: false,
       updateToken: '',
@@ -77,11 +80,17 @@ class App extends React.Component<{}, State> {
         this.setState({
           showCreate: e
         })
+      },
+      showEdit :false,
+      setShowEdit: (e) => {
+        this.setState({
+          showEdit: e
+        })
       }
     }
   }
 
-  handleSearch = () => {
+  handleSearch = (e: any) => {
     fetch(`http://localhost:8081/gifts/${this.state.giftName}`, {
       method: 'GET',
     })
@@ -148,7 +157,9 @@ class App extends React.Component<{}, State> {
               clearToken={this.state.clearToken}
               isLoggedIn={this.state.isLoggedIn}
               setShowCreate={this.state.setShowCreate}
+
             />
+
             {/* <Logout 
               clearToken={this.state.clearToken}/> */}
             {/* <Route exact path="/create"> */}
@@ -168,13 +179,24 @@ class App extends React.Component<{}, State> {
             owner={this.state.owner}
             price={this.state.price}
             sessionToken={this.state.sessionToken} />
+
           {/* <Auth updateToken={this.updateToken} />  */}
           {this.state.isLoggedIn === false ? <Auth
             setIsLoggedIn={this.state.setIsLoggedIn}
             updateToken={this.updateToken} /> : null}
           {/* <Button onClick={() => { this.setState({ isLoggedIn: true }) }}>Test</Button> */}
+          {/* <input placeholder='Ex: gift name' id="searchBar" value={this.state.giftName} onChange={e => this.handleSearch(e)}></input>
+          <br />
+          <Button id='search' onClick={this.handleSearch}>Search</Button> */}
           {this.state.isLoggedIn ?
             <ItemsTable
+              setShowEdit={this.state.setShowEdit}
+              description={this.state.description}
+              date={this.state.date}
+              purchased={this.state.purchased}
+              from={this.state.from}
+              price={this.state.price}
+              person={this.state.person}
               fetchGifts={this.fetchGifts}
               setGifts={this.state.setGifts}
               isLoggedIn={this.state.isLoggedIn}
@@ -184,7 +206,7 @@ class App extends React.Component<{}, State> {
               userId={this.state.userId} />
             : null
           }
-          <Button id='search' onClick={this.handleSearch}>Search</Button>
+
           {/* <Search /> */}
 
           <br />

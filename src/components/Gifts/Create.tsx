@@ -35,7 +35,6 @@ interface GiftCreateState {
     modal: boolean;
 }
 
-//make this like items class
 class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
     constructor(props: GiftCreateProp) {
         super(props)
@@ -52,15 +51,9 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
             setGifts: [],
             modal: false,
         }
+        this.clearInput = this.clearInput.bind(this);
 
     }
-    // resetForm() {
-    //     this.setState = {
-    //         giftName: (null),
-    //         description: ('null')
-    //     }
-    // }
-
 
     handleSubmit = () => {
         const body = {
@@ -89,6 +82,19 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                 this.props.fetchGifts()
                 this.props.setShowCreate(false)
             })
+    }
+    //this is clearing input when button is, but values are remaining from last entry
+    clearInput() {
+        this.setState({ 
+            giftName: '',
+            description: '',
+            date: '',
+            purchased: '',
+            person: '',
+            from: '',
+            owner: '',
+            price: ''
+        });
     }
 
     // componentDidMount() {
@@ -137,8 +143,8 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                         </form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color='secondary' style={{ marginLeft: '20px' }} id='resetForm' type='button'>Reset Gift Form</Button>
-                        <Button color='success' style={{ marginLeft: '15px' }} id="submitGift" type="button" onClick={this.handleSubmit}>Submit Gift!</Button>
+                        <Button id='clearForm' onChange={e => this.handleChange(e)} onClick={this.clearInput}>Reset Gift Form</Button>
+                        <Button color='success' id="submitGift" type="button" onClick={this.handleSubmit}>Submit Gift!</Button>
                     </ModalFooter>
                 </Modal>
     
