@@ -2,6 +2,7 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import Logout from '../Navbar/Logout/Logout';
+import '../Auth/auth.css'
 
 //change to class component
 
@@ -109,7 +110,7 @@ class Auth extends React.Component<AuthProp, AuthState> {
     render() {
         return (
             <div>
-                <form>
+                <form className='login-register'>
                     <h1>{this.state.login ? 'Login' : 'Register'}</h1>
                     <label htmlFor="email">Email</label>
                     <br />
@@ -121,12 +122,12 @@ class Auth extends React.Component<AuthProp, AuthState> {
                     <br />
                     {this.signupFields()}
                     <br />
-                    <Button type='button'
+                    <Button type='button' id="loginBtn"
                         onClick={this.loginToggle}
                     >
                         {this.state.login ? "Click Here to Register" : "Click Here to Login"}
                     </Button>
-                    <Button onClick={(e: any) => this.handleSubmit(e)} type='submit'>Submit</Button>
+                    <Button onClick={(e: any) => this.handleSubmit(e)} type='button' id="submitBtn">Submit</Button>
 
 
                 </form>

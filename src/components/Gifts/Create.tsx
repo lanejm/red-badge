@@ -113,8 +113,8 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
 
     render() {
         return (
-                <Modal isOpen={this.props.showCreate} toggle={this.toggle} >
-                    <ModalHeader>Create Gift</ModalHeader>
+                <Modal id="modalWindow" isOpen={this.props.showCreate} toggle={this.toggle} >
+                    <ModalHeader id="createGiftText">Create Gift</ModalHeader>
                     <ModalBody>
                         <form id='createGift' className='createGift'>
                             <label htmlFor='giftName'>Gift Name: </label>
@@ -142,7 +142,7 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                             <input name='price' placeholder='Ex: $200' id='price' value={this.state.price} onChange={e => this.handleChange(e)} required />
                         </form>
                     </ModalBody>
-                    <ModalFooter>
+                    <ModalFooter id="modalFooter">
                         <Button id='clearForm' onChange={e => this.handleChange(e)} onClick={this.clearInput}>Reset Gift Form</Button>
                         <Button color='success' id="submitGift" type="button" onClick={this.handleSubmit}>Submit Gift!</Button>
                     </ModalFooter>

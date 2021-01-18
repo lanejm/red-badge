@@ -1,0 +1,12 @@
+.navButtons {
+    font-size: 1.25em;
+    margin-right: 2em;
+    border: 0px;
+    cursor: pointer;
+    position: relative;
+    font-family: 'Texturina', serif;
+    font-weight: 500;
+    font-style: italic;
+    border-radius: 25px;
+}
+

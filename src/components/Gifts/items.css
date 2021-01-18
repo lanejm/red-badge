@@ -1,6 +1,7 @@
 .cards {
     margin-bottom: 20px;
     color: rgb(61, 190, 184);
+    width: 350px;
     
 
 }
@@ -11,7 +12,8 @@
 }
 
 .card-column {
-    margin-left: 3em;
+   margin-left: 1em;
+    
 }
 
 h2::first-letter{
@@ -20,4 +22,8 @@ h2::first-letter{
 
 h6::first-letter{
     text-transform: uppercase;
+}
+
+#editGift {
+    margin-bottom: 10px;
 }

@@ -1,0 +1,28 @@
+#loginBtn, #submitBtn {
+    transition: all 1s ease;
+    margin: 10px;
+    background-color: white;
+    font-style: italic;
+    font-weight: 500;
+    color: black;
+}
+
+#loginBtn:focus {
+    outline: 0px;
+}
+
+
+.login-register {
+  height: 500px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em 2em;
+  font-style: italic;
+  font-weight: 500;
+  border-radius: 50px;
+  box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(0, 102, 178, 1) 0%, rgba(24, 40, 72, 1)64%, rgba(255, 255, 255, 0) 93%);
+  color: white
+}

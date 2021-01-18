@@ -117,7 +117,7 @@ class GiftEdit extends React.Component<EditProps, EditState> {
                     <br />
                     <label htmlFor='price'>Price: </label>
                     <input name='price' placeholder='Ex: $200' id='price' value={this.state.price} onChange={e => this.handleEdit(e)} required />
-                    <Button color="success" id="submitEditGift" onClick={this.editItems} type="button">Update Gift!</Button>
+                    <Button color="success" id="submitEditGift" style={{marginTop: '10px'}}onClick={this.editItems} type="button">Update Gift!</Button>
                 </form>
             </div>
         )

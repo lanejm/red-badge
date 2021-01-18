@@ -2,7 +2,7 @@ import React from 'react';
 import Logout from './Logout/Logout';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Button } from 'reactstrap';
-// import './Navbar.css';
+import './navbar.css';
 
 interface NavProps {
   isLoggedIn: boolean;
@@ -31,7 +31,7 @@ class NavFile extends React.Component<NavProps, NavState> {
   render() {
     return (
       <div>
-        <Navbar color="faded" light>
+        <Navbar light id="navbarTop">
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
@@ -39,7 +39,7 @@ class NavFile extends React.Component<NavProps, NavState> {
               <>
               <NavItem>
                 <Link to="/create">
-                  <Button className="navButtons" color="success" onClick={() => this.props.setShowCreate(true)}>Create Gift Entry</Button>
+                  <Button className="navButtons" onClick={() => this.props.setShowCreate(true)}>Create Gift Entry</Button>
                   </Link>
               </NavItem>
               <NavItem>

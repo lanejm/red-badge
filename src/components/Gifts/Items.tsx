@@ -121,7 +121,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                         price={this.props.price}>
                                     </GiftEdit>
                                 </Collapse>
-                                <br />
                                 {true ?
                                     <Button color="danger" id="deleteReview" onClick={e => window.confirm("Are you sure you want to delete this item?") && this.deleteItems(item.id)}>{this.deleteItems}Delete</Button> : <div></div>}
                             </Card>

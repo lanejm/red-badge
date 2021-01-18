@@ -1,44 +1,16 @@
 .App {
   text-align: center;
+  background-color: rgba(173, 170, 170,);
+  font-family: 'Texturina', serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-image: url(../src/components/Auth/LoginRegister/pic1.jpg);
+  background-size: cover;
+  background-position: center center;
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#loginBtn {
+  transition: all 1s ease;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.App {
-  background-color: rgba(173, 170, 170, 0.589);
-}
-
-
