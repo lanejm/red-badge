@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from 'react';
+import React from 'react';
 import { Button, ButtonToggle } from 'reactstrap';
 
 interface EditProps {
@@ -61,15 +61,31 @@ class GiftEdit extends React.Component<EditProps, EditState> {
         // this.props.setShowEdit(true)
     }
 
-    editItems = () => {
-
+    editItems = (e:any) => {
+        //when green update button is clicked, this fires. Not updating though. Need to pull id from gift, not user? 
+        e.preventDefault()
+        const body ={
+            giftName: this.state.giftName,
+            description: this.state.description,
+            date: this.state.date,
+            purchased: this.state.purchased,
+            person: this.state.person,
+            from: this.state.from,
+            owner: this.state.owner,
+            price: this.state.price
+        }
         fetch(`http://localhost:8081/gifts/edit/${localStorage.getItem('id')}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': this.props.sessionToken
-            }
-        }).then(() => this.props.fetchGifts())
+            },
+            body: JSON.stringify(body)
+        }).then(r =>r.json())
+        .then(rObj => {
+            console.log(rObj) 
+        })
+        .then(() => this.props.fetchGifts())
         console.log('item edited')
     }
 

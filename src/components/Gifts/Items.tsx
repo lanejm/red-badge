@@ -103,10 +103,9 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                     <CardSubtitle tag="h6" >{item.price}</CardSubtitle>
                                 </CardBody>
                                 <CardFooter>Date Purchased: {item.date}</CardFooter>
-                                <br />
                                 <ButtonToggle color="warning" id="editGift" onClick={this.toggleEdit}>Edit Gift </ButtonToggle>
                                 <Collapse isOpen={!this.state.collapsed} >
-                                    <GiftEdit
+                                    <GiftEdit key={item.id}
                                         fetchGifts={this.props.fetchGifts}
                                         sessionToken={this.props.sessionToken}
                                         setShowEdit={this.props.setShowEdit}
@@ -122,9 +121,11 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                         price={this.props.price}>
                                     </GiftEdit>
                                 </Collapse>
+                                <br />
                                 {true ?
                                     <Button color="danger" id="deleteReview" onClick={e => window.confirm("Are you sure you want to delete this item?") && this.deleteItems(item.id)}>{this.deleteItems}Delete</Button> : <div></div>}
                             </Card>
+                            
                         </Col>)
                 })}
                 </Row>
@@ -140,6 +141,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                 {this.props.isLoggedIn ?
                     <div>
                         {this.displayItems()}
+                        
 
                     </div>
                     : null}
