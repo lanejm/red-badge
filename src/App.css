@@ -1,16 +1,27 @@
 .App {
   text-align: center;
-  background-color: rgba(173, 170, 170,);
+  background-color: blueviolet;
   font-family: 'Texturina', serif;
+  height: 100%;
+  background-repeat: repeat-y;
 }
 
 body {
-  background-image: url(../src/components/Auth/LoginRegister/pic1.jpg);
   background-size: cover;
-  background-position: center center;
+  background-position: center;
+  background-color: blueviolet;
+  height: 100%; 
   
 }
 
 #loginBtn {
   transition: all 1s ease;
+}
+
+#giftSearch {
+  margin-right: 10px;
+  border-radius: 10px;
+}
+html {
+  background-color: blueviolet;
 }

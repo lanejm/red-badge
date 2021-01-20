@@ -38,6 +38,7 @@ interface ItemsState {
     userId: string;
     showEdit: boolean;
     collapsed: boolean;
+    itemId: number;
 }
 
 class ItemsTable extends React.Component<ItemsProp, ItemsState> {
@@ -56,6 +57,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
             userId: 'userId',
             showEdit: false,
             collapsed: true,
+            itemId: 0,
 
         }
     }
@@ -82,7 +84,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
     }
 
 
-
     displayItems() {
         return (
             <div >
@@ -91,7 +92,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                     return (
                         <Col className="card-column" sm="3">
                             <Card className="cards" key={item.id}
-                                onMouseEnter={() => { console.log(item.id) }}>
+                                onMouseEnter={() => { this.setState({itemId : item.id})}}>
                                 <CardHeader className="item-name" tag="h2">{item.giftName}</CardHeader>
                                 <CardBody className="card-text">
                                     <CardSubtitle tag="h6" >{item.description}</CardSubtitle>
@@ -99,13 +100,12 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                     <CardSubtitle tag="h6" >{item.description}</CardSubtitle>
                                     <CardSubtitle tag="h6" >{item.person}</CardSubtitle>
                                     <CardSubtitle tag="h6" >{item.from}</CardSubtitle>
-                                    <CardSubtitle tag="h6" >{item.owner}</CardSubtitle>
                                     <CardSubtitle tag="h6" >{item.price}</CardSubtitle>
                                 </CardBody>
                                 <CardFooter>Date Purchased: {item.date}</CardFooter>
                                 <ButtonToggle color="warning" id="editGift" onClick={this.toggleEdit}>Edit Gift </ButtonToggle>
-                                <Collapse isOpen={!this.state.collapsed} >
-                                    <GiftEdit key={item.id}
+                                <Collapse isOpen={!this.state.collapsed && this.state.itemId === item.id} >
+                                    <GiftEdit itemId={item.id} key={item.id}
                                         fetchGifts={this.props.fetchGifts}
                                         sessionToken={this.props.sessionToken}
                                         setShowEdit={this.props.setShowEdit}
@@ -117,7 +117,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                         purchased={this.props.purchased}
                                         person={this.props.person}
                                         from={this.props.from}
-                                        owner={this.props.owner}
                                         price={this.props.price}>
                                     </GiftEdit>
                                 </Collapse>
@@ -154,10 +153,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
 export default ItemsTable;
 
 
-//need to render after clicking create gift entry button
 //style cards - alphabetical order?, hover, search
 
-//delete not deleting on front end. 
-
-//edit toggle is showing showing on all cards with clicked.  Way to make this into just one? 
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 
 export interface SearchProps {
-    giftName?: string;
+    giftName: string;
 }
 
 export interface SearchState {
@@ -33,9 +33,9 @@ class Search extends React.Component<SearchProps, SearchState> {
 
     }
 
-    componentDidMount() {
-        this.fetchGiftsName()
-    }
+    // componentDidMount() {
+    //     this.fetchGiftsName()
+    // }
     render() {
         return (
             <div>

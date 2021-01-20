@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonToggle } from 'reactstrap';
+import { Button} from 'reactstrap';
 
 interface EditProps {
     giftName: string,
@@ -8,13 +8,13 @@ interface EditProps {
     purchased: string,
     person: string,
     from: string,
-    owner: string,
     price: string
     isLoggedIn: boolean;
     showEdit: boolean;
     setShowEdit: (e:any) => void;
     sessionToken: string;
     fetchGifts: () => void;
+    itemId: any;
 }
 
 interface EditState {
@@ -24,7 +24,6 @@ interface EditState {
     purchased: string,
     person: string,
     from: string,
-    owner: string,
     price: string,
     showEdit: boolean,
     collapsed: boolean,
@@ -41,7 +40,6 @@ class GiftEdit extends React.Component<EditProps, EditState> {
             purchased: '',
             person: '',
             from: '',
-            owner: '',
             price: '',
             showEdit: true,
             collapsed: true,
@@ -71,10 +69,9 @@ class GiftEdit extends React.Component<EditProps, EditState> {
             purchased: this.state.purchased,
             person: this.state.person,
             from: this.state.from,
-            owner: this.state.owner,
             price: this.state.price
         }
-        fetch(`http://localhost:8081/gifts/edit/${localStorage.getItem('id')}`, {
+        fetch(`http://localhost:8081/gifts/edit/${this.props.itemId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +83,9 @@ class GiftEdit extends React.Component<EditProps, EditState> {
             console.log(rObj) 
         })
         .then(() => this.props.fetchGifts())
+        .catch(err => console.log(err))
         console.log('item edited')
+    
     }
 
     editItemsForm() {
@@ -111,9 +110,6 @@ class GiftEdit extends React.Component<EditProps, EditState> {
                     <br />
                     <label htmlFor='from'>From: </label>
                     <input name='from' placeholder='Who was this from?' id='from' value={this.state.from} onChange={e => this.handleEdit(e)} required />
-                    <br />
-                    <label htmlFor='owner'>Owner: </label>
-                    <input name='owner' placeholder='Owner of List' id='owner' value={this.state.owner} onChange={e => this.handleEdit(e)} required />
                     <br />
                     <label htmlFor='price'>Price: </label>
                     <input name='price' placeholder='Ex: $200' id='price' value={this.state.price} onChange={e => this.handleEdit(e)} required />

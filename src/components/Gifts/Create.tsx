@@ -63,7 +63,6 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
             purchased: this.state.purchased,
             person: this.state.person,
             from: this.state.from,
-            owner: this.state.owner,
             price: this.state.price,
         }
         fetch('http://localhost:8081/gifts/create', {
@@ -134,9 +133,6 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                             <br />
                             <label htmlFor='from'>From: </label>
                             <input name='from' placeholder='Who was this from?' id='from' value={this.state.from} onChange={e => this.handleChange(e)} required />
-                            <br />
-                            <label htmlFor='owner'>Owner: </label>
-                            <input name='owner' placeholder='Owner of List' id='owner' value={this.state.owner} onChange={e => this.handleChange(e)} required />
                             <br />
                             <label htmlFor='price'>Price: </label>
                             <input name='price' placeholder='Ex: $200' id='price' value={this.state.price} onChange={e => this.handleChange(e)} required />

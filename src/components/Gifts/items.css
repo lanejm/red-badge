@@ -1,7 +1,7 @@
 .cards {
     margin-bottom: 20px;
     color: rgb(61, 190, 184);
-    width: 350px;
+    width: 200px;
     
 
 }
@@ -12,7 +12,8 @@
 }
 
 .card-column {
-   margin-left: 1em;
+   margin-left: 10px;
+   margin-right: 10px;
     
 }
 
@@ -25,5 +26,5 @@ h6::first-letter{
 }
 
 #editGift {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }

@@ -110,7 +110,7 @@ class Auth extends React.Component<AuthProp, AuthState> {
     render() {
         return (
             <div>
-                <form className='login-register'>
+                <form className='login-register' style={{transition: 'all 1s ease'}}>
                     <h1>{this.state.login ? 'Login' : 'Register'}</h1>
                     <label htmlFor="email">Email</label>
                     <br />
@@ -122,12 +122,12 @@ class Auth extends React.Component<AuthProp, AuthState> {
                     <br />
                     {this.signupFields()}
                     <br />
-                    <Button type='button' id="loginBtn"
+                    <Button type='button' className="loginBtn" 
                         onClick={this.loginToggle}
                     >
                         {this.state.login ? "Click Here to Register" : "Click Here to Login"}
                     </Button>
-                    <Button onClick={(e: any) => this.handleSubmit(e)} type='button' id="submitBtn">Submit</Button>
+                    <Button onClick={(e: any) => this.handleSubmit(e)} type='button' className="submitBtn">Submit</Button>
 
 
                 </form>

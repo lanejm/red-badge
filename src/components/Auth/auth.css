@@ -1,4 +1,4 @@
-#loginBtn, #submitBtn {
+.loginBtn, .submitBtn {
     transition: all 1s ease;
     margin: 10px;
     background-color: white;
@@ -7,8 +7,12 @@
     color: black;
 }
 
-#loginBtn:focus {
+.loginBtn:focus {
     outline: 0px;
+}
+.loginBtn:active {
+  padding-bottom: 10px;
+    border-bottom: solid 2px #1059FF;
 }
 
 
@@ -24,5 +28,6 @@
   box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
   overflow: hidden;
   background: linear-gradient(180deg, rgba(0, 102, 178, 1) 0%, rgba(24, 40, 72, 1)64%, rgba(255, 255, 255, 0) 93%);
-  color: white
+  color: white;
+  transition: all 2s ease;
 }

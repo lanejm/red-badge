@@ -30,7 +30,7 @@ interface State {
   setIsLoggedIn: (e: any) => void;
   showCreate: boolean;
   setShowCreate: (e: any) => void;
-  setShowEdit: (e:any) => void;
+  setShowEdit: (e: any) => void;
   showEdit: boolean;
 }
 
@@ -81,7 +81,7 @@ class App extends React.Component<{}, State> {
           showCreate: e
         })
       },
-      showEdit :false,
+      showEdit: false,
       setShowEdit: (e) => {
         this.setState({
           showEdit: e
@@ -99,7 +99,7 @@ class App extends React.Component<{}, State> {
         this.setState({
           setGifts: rArr
         })
-      })
+      }).catch(err => console.log(err))
   }
 
   componentDidMount() {
@@ -136,7 +136,7 @@ class App extends React.Component<{}, State> {
           setGifts: rArr
         })
         console.log(this.state.setGifts)
-      })
+      }).catch(err => console.log(err))
 
   }
 
@@ -150,14 +150,13 @@ class App extends React.Component<{}, State> {
   // handleSearch() //outside of if statement so code is running
   render() {
     return (
-      <div className='App' >
+      <div className='App' style={{backgroundColor: 'blueviolet', height: '100%'}}>
         <Router>
           <Switch>
             <NavFile
               clearToken={this.state.clearToken}
               isLoggedIn={this.state.isLoggedIn}
               setShowCreate={this.state.setShowCreate}
-
             />
 
             {/* <Logout 
@@ -166,6 +165,7 @@ class App extends React.Component<{}, State> {
 
             {/* </Route> */}
           </Switch>
+
           <GiftsCreate
             fetchGifts={this.fetchGifts}
             showCreate={this.state.showCreate}
@@ -189,6 +189,10 @@ class App extends React.Component<{}, State> {
           <br />
           <Button id='search' onClick={this.handleSearch}>Search</Button> */}
           {this.state.isLoggedIn ?
+            <React.Fragment>
+            <Search giftName={this.state.giftName} />
+                <input placeholder="Ex. Mackbook Pro" id="giftSearch" value={this.state.giftName} />
+            <Button id="searchButton" onClick={this.handleSearch}>Search</Button>
             <ItemsTable
               setShowEdit={this.state.setShowEdit}
               description={this.state.description}
@@ -204,11 +208,9 @@ class App extends React.Component<{}, State> {
               owner={this.state.owner}
               sessionToken={this.state.sessionToken}
               userId={this.state.userId} />
+            </React.Fragment>
             : null
           }
-
-          {/* <Search /> */}
-
           <br />
           {/* <GiftsList userId={userId} fetchGifts={fetchGifts} gifts={gifts} /> */}
         </Router>
@@ -222,3 +224,6 @@ export default App;
 
 //add in "reviews.js" file
 //search not working. 
+//add holidays table
+//logout auto login problem
+//styling
