@@ -1,9 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { PassThrough } from 'stream';
 import '../Gifts/create.css'
-import GiftsList from './List';
 
 interface GiftCreateProp {
     giftName: string;

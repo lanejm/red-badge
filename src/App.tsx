@@ -5,11 +5,10 @@ import NavFile from './components/Navbar/Navbar';
 import GiftsCreate from './components/Gifts/Create';
 // import GiftsList from './components/Gifts/List';
 import Search from './components/Gifts/Search';
-import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import ItemsTable from './components/Gifts/Items';
-import Logout from './components/Navbar/Logout/Logout';
-import GiftEdit from './components/Gifts/Edit';
+// import Logout from './components/Navbar/Logout/Logout';
+// import GiftEdit from './components/Gifts/Edit';
 
 
 interface State {
@@ -86,20 +85,48 @@ class App extends React.Component<{}, State> {
         this.setState({
           showEdit: e
         })
-      }
+      },
     }
   }
 
   handleSearch = (e: any) => {
-    fetch(`http://localhost:8081/gifts/${this.state.giftName}`, {
-      method: 'GET',
+    this.setState({
+      setGifts: e
     })
-      .then(r => r.json())
-      .then(rArr => {
-        this.setState({
-          setGifts: rArr
-        })
-      }).catch(err => console.log(err))
+  }
+
+  // handleSearch = (e: any) => {
+  //   fetch(`http://localhost:8081/gifts/name/${this.state.giftName}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': this.state.sessionToken
+  //     }
+  //   })
+  //     .then(r => r.json())
+  //     .then(rArr => {
+  //       this.setState({
+  //         setGifts: rArr
+  //       })
+  //     }).catch(err => console.log(err))
+  // }
+  handleSearchChange = (e: any) => {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  deleteItems = (item: number) => {
+    fetch(`http://localhost:8081/gifts/delete/${item}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': this.state.sessionToken
+      })
+
+    }).then(() => this.fetchGifts())
+    console.log('item deleted')
   }
 
   componentDidMount() {
@@ -150,7 +177,7 @@ class App extends React.Component<{}, State> {
   // handleSearch() //outside of if statement so code is running
   render() {
     return (
-      <div className='App' style={{backgroundColor: 'blueviolet', height: '100%'}}>
+      <div className='App' style={{ backgroundColor: 'blueviolet', height: '100%' }}>
         <Router>
           <Switch>
             <NavFile
@@ -190,24 +217,28 @@ class App extends React.Component<{}, State> {
           <Button id='search' onClick={this.handleSearch}>Search</Button> */}
           {this.state.isLoggedIn ?
             <React.Fragment>
-            <Search giftName={this.state.giftName} />
-                <input placeholder="Ex. Mackbook Pro" id="giftSearch" value={this.state.giftName} />
-            <Button id="searchButton" onClick={this.handleSearch}>Search</Button>
-            <ItemsTable
-              setShowEdit={this.state.setShowEdit}
-              description={this.state.description}
-              date={this.state.date}
-              purchased={this.state.purchased}
-              from={this.state.from}
-              price={this.state.price}
-              person={this.state.person}
-              fetchGifts={this.fetchGifts}
-              setGifts={this.state.setGifts}
-              isLoggedIn={this.state.isLoggedIn}
-              giftName={this.state.giftName}
-              owner={this.state.owner}
-              sessionToken={this.state.sessionToken}
-              userId={this.state.userId} />
+              <Search
+                handleSearch={this.handleSearch}
+                setGifts={this.state.setGifts}
+                giftName={this.state.giftName} />
+              
+              
+              <ItemsTable
+                deleteItems={this.deleteItems}
+                setShowEdit={this.state.setShowEdit}
+                description={this.state.description}
+                date={this.state.date}
+                purchased={this.state.purchased}
+                from={this.state.from}
+                price={this.state.price}
+                person={this.state.person}
+                fetchGifts={this.fetchGifts}
+                setGifts={this.state.setGifts}
+                isLoggedIn={this.state.isLoggedIn}
+                giftName={this.state.giftName}
+                owner={this.state.owner}
+                sessionToken={this.state.sessionToken}
+                userId={this.state.userId} />
             </React.Fragment>
             : null
           }
@@ -221,9 +252,11 @@ class App extends React.Component<{}, State> {
 
 export default App;
 
-
-//add in "reviews.js" file
-//search not working. 
+ 
 //add holidays table
 //logout auto login problem
 //styling
+//mobile friendly
+//admin functionality - be able to delete user
+//login and password verification logic
+//add logic to make all items re-appear via 'reset' button after search. set state to true?   

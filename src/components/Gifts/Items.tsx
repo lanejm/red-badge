@@ -22,6 +22,7 @@ interface ItemsProp {
     fetchGifts: () => void;
     setGifts: any;
     setShowEdit: (e: any) => void;
+    deleteItems: (e: any) => void;
 
 }
 
@@ -63,17 +64,17 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
     }
 
 
-    deleteItems = (item: number) => {
-        fetch(`http://localhost:8081/gifts/delete/${item}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.sessionToken
-            })
+    // deleteItems = (item: number) => {
+    //     fetch(`http://localhost:8081/gifts/delete/${item}`, {
+    //         method: 'DELETE',
+    //         headers: new Headers({
+    //             'Content-Type': 'application/json',
+    //             'Authorization': this.props.sessionToken
+    //         })
 
-        }).then(() => this.props.fetchGifts())
-        console.log('item deleted')
-    }
+    //     }).then(() => this.props.fetchGifts())
+    //     console.log('item deleted')
+    // }
 
     componentDidMount() {
         this.props.fetchGifts()
@@ -92,7 +93,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                     return (
                         <Col className="card-column" sm="3">
                             <Card className="cards" key={item.id}
-                                onMouseEnter={() => { this.setState({itemId : item.id})}}>
+                                onMouseEnter={() => { this.setState({ itemId: item.id }) }}>
                                 <CardHeader className="item-name" tag="h2">{item.giftName}</CardHeader>
                                 <CardBody className="card-text">
                                     <CardSubtitle tag="h6" >{item.description}</CardSubtitle>
@@ -121,9 +122,9 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                     </GiftEdit>
                                 </Collapse>
                                 {true ?
-                                    <Button color="danger" id="deleteReview" onClick={e => window.confirm("Are you sure you want to delete this item?") && this.deleteItems(item.id)}>{this.deleteItems}Delete</Button> : <div></div>}
+                                    <Button color="danger" id="deleteReview" onClick={e => window.confirm("Are you sure you want to delete this item?") && this.props.deleteItems(item.id)}>{this.props.deleteItems}Delete</Button> : <div></div>}
                             </Card>
-                            
+
                         </Col>)
                 })}
                 </Row>
@@ -139,7 +140,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                 {this.props.isLoggedIn ?
                     <div>
                         {this.displayItems()}
-                        
+
 
                     </div>
                     : null}
@@ -153,6 +154,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
 export default ItemsTable;
 
 
-//style cards - alphabetical order?, hover, search
+//style cards - hover, search
 
 

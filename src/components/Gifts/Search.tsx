@@ -1,48 +1,62 @@
-import * as React from 'react';
+import React from 'react';
+
+import {
+     Button, 
+} from 'reactstrap';
 
 
-export interface SearchProps {
+interface SearchProps {
     giftName: string;
+    setGifts: any;
+    handleSearch: (e: any) => void;
+    
 }
 
-export interface SearchState {
-    giftName?: string;
-    setGiftsName: []
+interface SearchState {
+    giftName: string;
+    itemId: number;
+    searchTerm: string;
+    searchComplete: boolean;
+    testArray: [];
 }
 
 class Search extends React.Component<SearchProps, SearchState> {
     constructor(props: SearchProps) {
         super(props);
         this.state = {
-            giftName: 'gift',
-            setGiftsName: []
+            giftName: '',
+            itemId: 0,
+            searchTerm: '',
+            searchComplete: false,
+            testArray: [],
 
         };
     }
 
     fetchGiftsName = () => {
-        fetch(`http://localhost:8081/gifts/${this.props.giftName}`, {
+        fetch(`http://localhost:8081/gifts/name/${this.state.searchTerm}`, {
             method: 'GET'
         }).then(r => r.json())
             .then(rArr => {
+                this.props.handleSearch(rArr)
                 this.setState({
-                    setGiftsName: rArr
+                    searchComplete: true
                 })
-                // console.log(this.state.setGifts)
             })
 
     }
 
-    // componentDidMount() {
-    //     this.fetchGiftsName()
-    // }
+
     render() {
         return (
             <div>
-                {this.props.giftName}
+                <input placeholder="Ex. Macbook Pro" id="giftSearch" value={this.state.searchTerm} onChange={e => this.setState({searchTerm: e.target.value})} />
+                <Button id="searchButton" onClick={this.fetchGiftsName}>Search</Button>
             </div>
         );
     }
 }
 
 export default Search;
+
+//add logic to make all items re-appear via 'reset' button.  
