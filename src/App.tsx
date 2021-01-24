@@ -177,7 +177,7 @@ class App extends React.Component<{}, State> {
   // handleSearch() //outside of if statement so code is running
   render() {
     return (
-      <div className='App' style={{ backgroundColor: 'blueviolet', height: '100%' }}>
+      <div className='App' style={{ backgroundColor: 'black rgb(20, 20, 20)', height: '100%' }}>
         <Router>
           <Switch>
             <NavFile

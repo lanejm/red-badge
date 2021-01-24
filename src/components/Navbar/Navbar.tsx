@@ -32,14 +32,14 @@ class NavFile extends React.Component<NavProps, NavState> {
     return (
       <div>
         <Navbar light id="navbarTop">
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+          <NavbarToggler id="navbarToggler" onClick={this.toggleNavbar} />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               {this.props.isLoggedIn ? 
               <>
               <NavItem>
                 <Link to="/create">
-                  <Button className="navButtons" onClick={() => this.props.setShowCreate(true)}>Create Gift Entry</Button>
+                  <Button className="navButtons" style={{backgroundColor:"rgb(130, 217, 87)"}}onClick={() => this.props.setShowCreate(true)}>Create Gift Entry</Button>
                   </Link>
               </NavItem>
               <NavItem>

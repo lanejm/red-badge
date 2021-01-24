@@ -1,19 +1,54 @@
 .navButtons {
     font-size: 1.25em;
-    margin-right: 2em;
+    /* margin-right: 2em; */
     border: 0px;
     cursor: pointer;
-    position: relative;
     font-family: 'Texturina', serif;
     font-weight: 500;
     font-style: italic;
     border-radius: 25px;
+    margin-top: .5em;
+    float: right;
+   
+}
+
+#navbarToggler{
+    background-color: rgb(236, 236, 80);
+    float: right;
+    position: relative;
 }
 
 #navbarTop {
-    
-    left: 10px;
-    top: 5px;
+    float: right;
+
+
+}
+#logout {
+    background-color: rgb(236, 99, 30);
+}
+
+.navbar {
+    float: right;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
 
 /* adjust nav bars to look better */
+
+/* change to dropdown? */

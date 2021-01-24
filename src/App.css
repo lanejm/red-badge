@@ -1,15 +1,15 @@
 .App {
   text-align: center;
-  background-color: blueviolet;
+  background-color: rgb(20, 20, 20);
   font-family: 'Texturina', serif;
   height: 100%;
   background-repeat: repeat-y;
 }
 
 body {
+  background-color: rgb(20, 20, 20);
   background-size: cover;
   background-position: center;
-  background-color: blueviolet;
   height: 100%; 
   
 }
@@ -23,5 +23,13 @@ body {
   border-radius: 10px;
 }
 html {
-  background-color: blueviolet;
+  background-color: rgb(20, 20, 20);
 }
+
+/* colors
+
+blue rgb(64, 173, 206)
+yellow rgb(236, 236, 80)
+orange rgb(236, 99, 30)
+green rgb(130, 217, 87)
+black rgb(20, 20, 20) */

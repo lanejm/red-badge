@@ -34,7 +34,7 @@ class Logout extends React.Component<LogoutProps, LogoutState> {
   render () {
       return(
           <div>
-              <Button className="navButtons" color="danger" id="logout" onClick={() => this.props.clearToken()}>Logout</Button>
+              <Button className="navButtons" id="logout" onClick={() => this.props.clearToken()}>Logout</Button>
               <Redirect to="/" />
           </div>
       )

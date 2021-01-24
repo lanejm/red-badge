@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Gifts/search.css'
 
 import {
      Button, 
@@ -50,7 +51,7 @@ class Search extends React.Component<SearchProps, SearchState> {
     render() {
         return (
             <div>
-                <input placeholder="Ex. Macbook Pro" id="giftSearch" value={this.state.searchTerm} onChange={e => this.setState({searchTerm: e.target.value})} />
+                <input id="inputBar" type="text" name="search" placeholder="Search..." value={this.state.searchTerm} onChange={e => this.setState({searchTerm: e.target.value})} />
                 <Button id="searchButton" onClick={this.fetchGiftsName}>Search</Button>
             </div>
         );

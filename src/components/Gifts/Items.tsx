@@ -87,11 +87,13 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
 
     displayItems() {
         return (
-            <div >
+            <div>
                 <Row className="testing">{this.props.setGifts?.map((item: any, index: any) => {
-
+                    <br />
+                    
                     return (
-                        <Col className="card-column" sm="3">
+                        <Col className="col-sm-3">
+                            <br />
                             <Card className="cards" key={item.id}
                                 onMouseEnter={() => { this.setState({ itemId: item.id }) }}>
                                 <CardHeader className="item-name" tag="h2">{item.giftName}</CardHeader>
@@ -104,7 +106,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                     <CardSubtitle tag="h6" >{item.price}</CardSubtitle>
                                 </CardBody>
                                 <CardFooter>Date Purchased: {item.date}</CardFooter>
-                                <ButtonToggle color="warning" id="editGift" onClick={this.toggleEdit}>Edit Gift </ButtonToggle>
+                                <ButtonToggle id="editGift" onClick={this.toggleEdit}>Edit Gift </ButtonToggle>
                                 <Collapse isOpen={!this.state.collapsed && this.state.itemId === item.id} >
                                     <GiftEdit itemId={item.id} key={item.id}
                                         fetchGifts={this.props.fetchGifts}
@@ -122,7 +124,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                     </GiftEdit>
                                 </Collapse>
                                 {true ?
-                                    <Button color="danger" id="deleteReview" onClick={e => window.confirm("Are you sure you want to delete this item?") && this.props.deleteItems(item.id)}>{this.props.deleteItems}Delete</Button> : <div></div>}
+                                    <Button id="deleteGift" onClick={e => window.confirm("Are you sure you want to delete this item?") && this.props.deleteItems(item.id)}>{this.props.deleteItems}Delete</Button> : <div></div>}
                             </Card>
 
                         </Col>)
