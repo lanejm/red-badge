@@ -7,6 +7,7 @@ import GiftsCreate from './components/Gifts/Create';
 import Search from './components/Gifts/Search';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import ItemsTable from './components/Gifts/Items';
+import HolidaysCreate from './components/Gifts/HolidaysCreate';
 // import Logout from './components/Navbar/Logout/Logout';
 // import GiftEdit from './components/Gifts/Edit';
 
@@ -22,15 +23,19 @@ interface State {
   price: string;
   sessionToken: string;
   setGifts: [];
+  setHolidays: [];
   userId: string;
   updateToken: string;
   isLoggedIn: boolean;
-  clearToken: any;
+  // clearToken: any;
   setIsLoggedIn: (e: any) => void;
   showCreate: boolean;
   setShowCreate: (e: any) => void;
   setShowEdit: (e: any) => void;
   showEdit: boolean;
+  holidays: string;
+  showHoliday: boolean;
+  setShowHoliday: (e: any) => void;
 }
 
 // const clearToken = () => {
@@ -59,16 +64,20 @@ class App extends React.Component<{}, State> {
       from: '',
       owner: '',
       price: '',
+      holidays: '',
       sessionToken: '',
       userId: '',
       setGifts: [],
       isLoggedIn: false,
       updateToken: '',
-      clearToken: () => {
-        this.setState({
-          isLoggedIn: false
-        })
-      },
+      setHolidays: [],
+      // clearToken: () => {
+      //   this.setState({
+      //     isLoggedIn: false,
+      //     sessionToken: '',
+      //     userId: ''
+      //   })
+      // },
       setIsLoggedIn: (e) => {
         this.setState({
           isLoggedIn: e
@@ -86,7 +95,16 @@ class App extends React.Component<{}, State> {
           showEdit: e
         })
       },
+      showHoliday: false,
+      setShowHoliday: (e) => {
+        this.setState({
+          showHoliday: e
+        })
+      },
     }
+    this.clearToken = this.clearToken.bind(this)
+    this.fetchGifts = this.fetchGifts.bind(this)
+    this.fetchHolidays = this.fetchHolidays.bind(this)
   }
 
   handleSearch = (e: any) => {
@@ -139,7 +157,9 @@ class App extends React.Component<{}, State> {
 
   clearToken() {
     this.setState({
-      isLoggedIn: false
+      isLoggedIn: false,
+      sessionToken: '',
+      userId: ''
     })
     console.log("test of clear token")
     localStorage.clear()
@@ -166,6 +186,21 @@ class App extends React.Component<{}, State> {
       }).catch(err => console.log(err))
 
   }
+  fetchHolidays = () => {
+    fetch(`http://localhost:8081/holidays/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': this.state.sessionToken
+      }
+    }).then(r => r.json())
+      .then(rArr => {
+        this.setState({
+          setHolidays: rArr
+        })
+        console.log(this.state.setHolidays)
+      }).catch(err => console.log(err))
+  }
 
 
   // this.componentDidMount() {
@@ -181,9 +216,10 @@ class App extends React.Component<{}, State> {
         <Router>
           <Switch>
             <NavFile
-              clearToken={this.state.clearToken}
+              clearToken={this.clearToken}
               isLoggedIn={this.state.isLoggedIn}
               setShowCreate={this.state.setShowCreate}
+              setHolidayCreate={this.state.setShowHoliday}
             />
 
             {/* <Logout 
@@ -192,7 +228,13 @@ class App extends React.Component<{}, State> {
 
             {/* </Route> */}
           </Switch>
-
+          <HolidaysCreate
+            showHoliday={this.state.showHoliday}
+            setShowHoliday={this.state.setShowHoliday}
+            fetchHolidays={this.fetchHolidays}
+            holiday={this.state.holidays}
+            date={this.state.date}
+            sessionToken={this.state.sessionToken} />
           <GiftsCreate
             fetchGifts={this.fetchGifts}
             showCreate={this.state.showCreate}
@@ -214,15 +256,17 @@ class App extends React.Component<{}, State> {
           {/* <Button onClick={() => { this.setState({ isLoggedIn: true }) }}>Test</Button> */}
           {/* <input placeholder='Ex: gift name' id="searchBar" value={this.state.giftName} onChange={e => this.handleSearch(e)}></input>
           <br />
-          <Button id='search' onClick={this.handleSearch}>Search</Button> */}
+        <Button id='search' onClick={this.handleSearch}>Search</Button> */}
           {this.state.isLoggedIn ?
             <React.Fragment>
               <Search
+                fetchGifts={this.fetchGifts}
                 handleSearch={this.handleSearch}
                 setGifts={this.state.setGifts}
                 giftName={this.state.giftName} />
-              
-              
+
+
+              <h1 className="mainText">Here are your gifts!</h1>
               <ItemsTable
                 deleteItems={this.deleteItems}
                 setShowEdit={this.state.setShowEdit}
@@ -252,11 +296,16 @@ class App extends React.Component<{}, State> {
 
 export default App;
 
- 
+
 //add holidays table
-//logout auto login problem
 //styling
 //mobile friendly
 //admin functionality - be able to delete user
-//login and password verification logic
-//add logic to make all items re-appear via 'reset' button after search. set state to true?   
+//login and password verification logic & user verification
+//readme file
+//db associations
+//display holidays
+//clean up code
+
+
+//heroku deployment

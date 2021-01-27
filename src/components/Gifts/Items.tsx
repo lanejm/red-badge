@@ -63,19 +63,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
         }
     }
 
-
-    // deleteItems = (item: number) => {
-    //     fetch(`http://localhost:8081/gifts/delete/${item}`, {
-    //         method: 'DELETE',
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': this.props.sessionToken
-    //         })
-
-    //     }).then(() => this.props.fetchGifts())
-    //     console.log('item deleted')
-    // }
-
     componentDidMount() {
         this.props.fetchGifts()
     }
@@ -98,12 +85,10 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                 onMouseEnter={() => { this.setState({ itemId: item.id }) }}>
                                 <CardHeader className="item-name" tag="h2">{item.giftName}</CardHeader>
                                 <CardBody className="card-text">
-                                    <CardSubtitle tag="h6" >{item.description}</CardSubtitle>
-                                    <CardSubtitle tag="h6" >{item.purchased}</CardSubtitle>
-                                    <CardSubtitle tag="h6" >{item.description}</CardSubtitle>
-                                    <CardSubtitle tag="h6" >{item.person}</CardSubtitle>
-                                    <CardSubtitle tag="h6" >{item.from}</CardSubtitle>
-                                    <CardSubtitle tag="h6" >{item.price}</CardSubtitle>
+                                    <CardSubtitle tag="h6" >From: {item.from}</CardSubtitle>
+                                    <CardSubtitle tag="h6" >Description: {item.description}</CardSubtitle>
+                                    <CardSubtitle tag="h6" >Purchased: {item.purchased}</CardSubtitle>
+                                    <CardSubtitle tag="h6" >Cost: {item.price}</CardSubtitle>
                                 </CardBody>
                                 <CardFooter>Date Purchased: {item.date}</CardFooter>
                                 <ButtonToggle id="editGift" onClick={this.toggleEdit}>Edit Gift </ButtonToggle>
@@ -118,7 +103,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                                         description={this.props.description}
                                         date={this.props.date}
                                         purchased={this.props.purchased}
-                                        person={this.props.person}
                                         from={this.props.from}
                                         price={this.props.price}>
                                     </GiftEdit>

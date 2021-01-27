@@ -10,6 +10,7 @@ interface SearchProps {
     giftName: string;
     setGifts: any;
     handleSearch: (e: any) => void;
+    fetchGifts: any;
     
 }
 
@@ -44,6 +45,7 @@ class Search extends React.Component<SearchProps, SearchState> {
                     searchComplete: true
                 })
             })
+            .catch(err => alert('Enter a search term!'))
 
     }
 
@@ -53,6 +55,7 @@ class Search extends React.Component<SearchProps, SearchState> {
             <div>
                 <input id="inputBar" type="text" name="search" placeholder="Search..." value={this.state.searchTerm} onChange={e => this.setState({searchTerm: e.target.value})} />
                 <Button id="searchButton" onClick={this.fetchGiftsName}>Search</Button>
+                <Button id="cancelButton" onClick={this.props.fetchGifts}>Cancel</Button>
             </div>
         );
     }

@@ -25,6 +25,12 @@ body {
 html {
   background-color: rgb(20, 20, 20);
 }
+.mainText {
+  color: white;
+  font-family: 'Texturina', serif;
+  text-align: center;
+  font-style: italic;
+}
 
 /* colors
 

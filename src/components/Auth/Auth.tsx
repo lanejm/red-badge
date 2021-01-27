@@ -130,12 +130,12 @@ class Auth extends React.Component<AuthProp, AuthState> {
                     <br />
                     {this.signupFields()}
                     <br />
-                    <Button type='button' className="loginBtn"
+                    <Button type='button' className="loginBtn" style={{backgroundColor: 'rgb(236, 99, 30)'}}
                         onClick={this.loginToggle}
                     >
                         {this.state.login ? "Click Here to Register" : "Click Here to Login"}
                     </Button>
-                    <Button onClick={(e: any) => this.handleSubmit(e)} type='button' className="submitBtn">Submit</Button>
+                    <Button onClick={(e: any) => this.handleSubmit(e)} type='button' className="submitBtn" style={{backgroundColor: "rgb(64, 173, 206)"}}>Submit</Button>
 
 
                 </form>

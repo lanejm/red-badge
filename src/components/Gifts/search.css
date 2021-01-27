@@ -17,6 +17,12 @@ input[type=text] {
     /* float: left; */
 }
 
+#cancelButton {
+  margin-left: 10px;
+  height: 35px;
+  background-color: rgb(236, 99, 30);
+}
+
 #inputBar {
     margin-left: 25px;
     margin-top: 25px;

@@ -1,13 +1,14 @@
 import React from 'react';
 import Logout from './Logout/Logout';
 import { Link } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Button } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Button, } from 'reactstrap';
 import './navbar.css';
 
 interface NavProps {
   isLoggedIn: boolean;
   clearToken: any;
-  setShowCreate: (e:any) => void;
+  setShowCreate: (e: any) => void;
+  setHolidayCreate: (e: any) => void;
 }
 interface NavState {
   collapsed: boolean;
@@ -20,7 +21,7 @@ class NavFile extends React.Component<NavProps, NavState> {
     super(props);
     this.state = {
       collapsed: true,
-      
+
     }
   }
 
@@ -35,18 +36,21 @@ class NavFile extends React.Component<NavProps, NavState> {
           <NavbarToggler id="navbarToggler" onClick={this.toggleNavbar} />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
-              {this.props.isLoggedIn ? 
-              <>
-              <NavItem>
-                <Link to="/create">
-                  <Button className="navButtons" style={{backgroundColor:"rgb(130, 217, 87)"}}onClick={() => this.props.setShowCreate(true)}>Create Gift Entry</Button>
-                  </Link>
-              </NavItem>
-              <NavItem>
-                <NavLink><Logout clearToken={this.props.clearToken} />
-                </NavLink>
-              </NavItem>
-              </> : null }
+              {this.props.isLoggedIn ?
+                <>
+                  <NavItem>
+                    <Link to="/create">
+                      <Button className="navButtons" style={{ backgroundColor: "rgb(130, 217, 87)" }} onClick={() => this.props.setShowCreate(true)}>Add a Gift!</Button>
+                    </Link>
+                    <Link to="/holidays/create">
+                      <Button className="navButtons" style={{ backgroundColor: "rgb(130, 217, 87)", }} onClick={() => this.props.setHolidayCreate(true)}>Add a Holiday!</Button>
+                    </Link>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink><Logout clearToken={this.props.clearToken} />
+                    </NavLink>
+                  </NavItem>
+                </> : null}
             </Nav>
           </Collapse>
         </Navbar>

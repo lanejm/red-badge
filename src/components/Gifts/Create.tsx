@@ -77,7 +77,9 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                 // history.push('/')
                 this.props.fetchGifts()
                 this.props.setShowCreate(false)
+                alert('Gift Added!')
             })
+    
     }
     //this is clearing input when button is, but values are remaining from last entry
     clearInput() {
@@ -110,7 +112,7 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
     render() {
         return (
                 <Modal id="modalWindow" isOpen={this.props.showCreate} toggle={this.toggle} >
-                    <ModalHeader id="createGiftText">Create Gift</ModalHeader>
+                    <ModalHeader id="createGiftText" style={{backgroundColor: "rgb(64, 173, 206)",}}>Create Gift</ModalHeader>
                     <ModalBody>
                         <form id='createGift' className='createGift'>
                             <label htmlFor='giftName'>Gift Name: </label>
@@ -125,9 +127,6 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                             <label htmlFor='purchased'>Purchased: </label>
                             <input name='purchased' placeholder='Where was this purchased?' id='purchased' value={this.state.purchased} onChange={e => this.handleChange(e)} />
                             <br />
-                            <label htmlFor='person'>Person: </label>
-                            <input name='person' placeholder='Who was this for?' id='person' value={this.state.person} onChange={e => this.handleChange(e)}required />
-                            <br />
                             <label htmlFor='from'>From: </label>
                             <input name='from' placeholder='Who was this from?' id='from' value={this.state.from} onChange={e => this.handleChange(e)} required />
                             <br />
@@ -135,9 +134,9 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
                             <input name='price' placeholder='Ex: $200' id='price' value={this.state.price} onChange={e => this.handleChange(e)} required />
                         </form>
                     </ModalBody>
-                    <ModalFooter id="modalFooter">
-                        <Button id='clearForm' onChange={e => this.handleChange(e)} onClick={this.clearInput}>Reset Gift Form</Button>
-                        <Button color='success' id="submitGift" type="button" onClick={this.handleSubmit}>Submit Gift!</Button>
+                    <ModalFooter id="modalFooter" style={{backgroundColor: "rgb(64, 173, 206)"}}>
+                        <Button id='clearForm' onChange={e => this.handleChange(e)} onClick={this.clearInput} style={{backgroundColor: 'rgb(236, 99, 30)'}}>Reset Gift Form</Button>
+                        <Button color='success' id="submitGift" type="button" onClick={this.handleSubmit} style={{backgroundColor:"rgb(130, 217, 87)"}} >Submit Gift!</Button>
                     </ModalFooter>
                 </Modal>
     

@@ -6,7 +6,6 @@ interface EditProps {
     description: string,
     date: string,
     purchased: string,
-    person: string,
     from: string,
     price: string
     isLoggedIn: boolean;

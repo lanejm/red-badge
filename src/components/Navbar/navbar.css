@@ -8,7 +8,7 @@
     font-style: italic;
     border-radius: 25px;
     margin-top: .5em;
-    float: right;
+    float: left;
    
 }
 
@@ -18,17 +18,13 @@
     position: relative;
 }
 
-#navbarTop {
-    float: right;
 
-
-}
 #logout {
     background-color: rgb(236, 99, 30);
 }
 
 .navbar {
-    float: right;
+    /* float: right; */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
