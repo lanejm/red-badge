@@ -11,6 +11,8 @@ interface SearchProps {
     setGifts: any;
     handleSearch: (e: any) => void;
     fetchGifts: any;
+    isLoggedIn: boolean;
+    userId: string;
     
 }
 
@@ -40,6 +42,7 @@ class Search extends React.Component<SearchProps, SearchState> {
             method: 'GET'
         }).then(r => r.json())
             .then(rArr => {
+                // if(rArr.owner === this.props.userId) {
                 this.props.handleSearch(rArr)
                 this.setState({
                     searchComplete: true
@@ -47,7 +50,7 @@ class Search extends React.Component<SearchProps, SearchState> {
             })
             .catch(err => alert('Enter a search term!'))
 
-    }
+        }
 
 
     render() {
@@ -62,5 +65,3 @@ class Search extends React.Component<SearchProps, SearchState> {
 }
 
 export default Search;
-
-//add logic to make all items re-appear via 'reset' button.  

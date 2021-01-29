@@ -8,6 +8,7 @@ import Search from './components/Gifts/Search';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import ItemsTable from './components/Gifts/Items';
 import HolidaysCreate from './components/Gifts/HolidaysCreate';
+import HolidayItemsTable from './components/Gifts/HolidaysItems';
 // import Logout from './components/Navbar/Logout/Logout';
 // import GiftEdit from './components/Gifts/Edit';
 
@@ -33,9 +34,10 @@ interface State {
   setShowCreate: (e: any) => void;
   setShowEdit: (e: any) => void;
   showEdit: boolean;
-  holidays: string;
-  showHoliday: boolean;
-  setShowHoliday: (e: any) => void;
+  holiday: string;
+  showHolidays: boolean;
+  setShowHolidays: (e: any) => void;
+  received: string;
 }
 
 // const clearToken = () => {
@@ -64,13 +66,14 @@ class App extends React.Component<{}, State> {
       from: '',
       owner: '',
       price: '',
-      holidays: '',
+      holiday: '',
       sessionToken: '',
       userId: '',
       setGifts: [],
       isLoggedIn: false,
       updateToken: '',
       setHolidays: [],
+      received: '',
       // clearToken: () => {
       //   this.setState({
       //     isLoggedIn: false,
@@ -95,15 +98,17 @@ class App extends React.Component<{}, State> {
           showEdit: e
         })
       },
-      showHoliday: false,
-      setShowHoliday: (e) => {
+      showHolidays: false,
+      setShowHolidays: (e) => {
         this.setState({
-          showHoliday: e
+          showHolidays: e
         })
       },
     }
     this.clearToken = this.clearToken.bind(this)
     this.fetchGifts = this.fetchGifts.bind(this)
+    this.fetchHolidays = this.fetchHolidays.bind(this)
+    this.deleteItems = this.deleteItems.bind(this)
     this.fetchHolidays = this.fetchHolidays.bind(this)
   }
 
@@ -147,6 +152,18 @@ class App extends React.Component<{}, State> {
     console.log('item deleted')
   }
 
+  deleteHolidays = (item: number) => {
+    fetch(`http://localhost:8081/holidays/delete/${item}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': this.state.sessionToken
+      })
+
+    }).then(() => this.fetchHolidays())
+    console.log('item deleted')
+  }
+
   componentDidMount() {
     if (localStorage.getItem('token')) {
       this.setState({
@@ -161,7 +178,7 @@ class App extends React.Component<{}, State> {
       sessionToken: '',
       userId: ''
     })
-    console.log("test of clear token")
+    console.log("cleared the token has")
     localStorage.clear()
   }
 
@@ -187,7 +204,7 @@ class App extends React.Component<{}, State> {
 
   }
   fetchHolidays = () => {
-    fetch(`http://localhost:8081/holidays/`, {
+    fetch(`http://localhost:8081/holidays/${localStorage.getItem('id')}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -219,7 +236,7 @@ class App extends React.Component<{}, State> {
               clearToken={this.clearToken}
               isLoggedIn={this.state.isLoggedIn}
               setShowCreate={this.state.setShowCreate}
-              setHolidayCreate={this.state.setShowHoliday}
+              setHolidayCreate={this.state.setShowHolidays}
             />
 
             {/* <Logout 
@@ -229,12 +246,13 @@ class App extends React.Component<{}, State> {
             {/* </Route> */}
           </Switch>
           <HolidaysCreate
-            showHoliday={this.state.showHoliday}
-            setShowHoliday={this.state.setShowHoliday}
+            showHolidays={this.state.showHolidays}
+            setShowHolidays={this.state.setShowHolidays}
             fetchHolidays={this.fetchHolidays}
-            holiday={this.state.holidays}
+            holiday={this.state.holiday}
             date={this.state.date}
-            sessionToken={this.state.sessionToken} />
+            sessionToken={this.state.sessionToken} 
+            received={this.state.received}/>
           <GiftsCreate
             fetchGifts={this.fetchGifts}
             showCreate={this.state.showCreate}
@@ -260,6 +278,8 @@ class App extends React.Component<{}, State> {
           {this.state.isLoggedIn ?
             <React.Fragment>
               <Search
+                userId={this.state.userId}
+                isLoggedIn={this.state.isLoggedIn}
                 fetchGifts={this.fetchGifts}
                 handleSearch={this.handleSearch}
                 setGifts={this.state.setGifts}
@@ -283,6 +303,16 @@ class App extends React.Component<{}, State> {
                 owner={this.state.owner}
                 sessionToken={this.state.sessionToken}
                 userId={this.state.userId} />
+                <HolidayItemsTable
+                holiday={this.state.holiday}
+                date={this.state.date}
+                received={this.state.received}
+                sessionToken={this.state.sessionToken}
+                fetchHolidays={this.fetchHolidays}
+                deleteHolidays={this.deleteHolidays}
+                isLoggedIn={this.state.isLoggedIn}
+                setHolidays={this.state.setHolidays}
+                setShowEdit={this.state.setShowEdit} />
             </React.Fragment>
             : null
           }
@@ -301,11 +331,11 @@ export default App;
 //styling
 //mobile friendly
 //admin functionality - be able to delete user
-//login and password verification logic & user verification
 //readme file
 //db associations
-//display holidays
 //clean up code
-
+//fix search bug
+//holiday search
+//holiday edit
 
 //heroku deployment

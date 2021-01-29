@@ -2,8 +2,6 @@ import React from 'react'
 import { Button } from 'reactstrap'
 import '../Auth/auth.css'
 
-//change to class component
-
 
 interface AuthProp {
     // firstName: string;
@@ -27,6 +25,8 @@ interface AuthState {
     isLoggedIn: boolean;
     clearToken: any;
     updateToken: string;
+    input: any;
+    errors: any;
 }
 
 class Auth extends React.Component<AuthProp, AuthState> {
@@ -41,6 +41,8 @@ class Auth extends React.Component<AuthProp, AuthState> {
             sessionToken: '',
             updateToken: '',
             userId: 'userId',
+            input: {},
+            errors: {},
             isLoggedIn: false,
             clearToken: () => {
                 this.setState({
@@ -48,6 +50,7 @@ class Auth extends React.Component<AuthProp, AuthState> {
                 })
             }
         }
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     loginToggle = () => {
@@ -78,9 +81,13 @@ class Auth extends React.Component<AuthProp, AuthState> {
                 body: JSON.stringify(body)
             }).then(r => r.json())
                 .then(rObj => {
-                    this.updateToken(rObj.sessionToken, rObj.user.id)
-                    this.props.setIsLoggedIn(true)
+                    if(rObj.error) {
+                        window.alert(rObj.error)
+                    } else {
+                    this.updateToken(rObj.sessionToken, rObj.user.id)  //add in if else here?
+                    this.props.setIsLoggedIn(true) }
                 })
+                .catch(err => console.log(err))
             // this.setState({isLoggedIn:true})
         } else {
             window.alert("Password must be at least 8 characters")
