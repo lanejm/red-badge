@@ -270,12 +270,11 @@ class App extends React.Component<{}, State> {
 export default App;
 
 
-//fix search bug
-//holiday search
 //styling
 //mobile friendly
 //admin functionality - be able to delete user
 //readme file
 //clean up code
+//put all the info as to what app can do in readme
 
 //heroku deployment
