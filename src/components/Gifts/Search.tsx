@@ -1,5 +1,6 @@
 import React from 'react';
-import '../Gifts/search.css'
+import '../Gifts/search.css';
+import APIURL from '../../helpers/environment';
 
 
 import {
@@ -40,7 +41,7 @@ class Search extends React.Component<SearchProps, SearchState> {
     }
 
     fetchGiftsName = () => {
-        fetch(`http://localhost:8081/gifts/name/${this.state.searchTerm}`, {
+        fetch(`${APIURL}/gifts/name/${this.state.searchTerm}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button} from 'reactstrap';
+import APIURL from '../../helpers/environment';
 
 interface EditProps {
     giftName: string,
@@ -68,7 +69,7 @@ class GiftEdit extends React.Component<EditProps, EditState> {
             from: this.state.from,
             price: this.state.price
         }
-        fetch(`http://localhost:8081/gifts/edit/${this.props.itemId}`, {
+        fetch(`${APIURL}/gifts/edit/${this.props.itemId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

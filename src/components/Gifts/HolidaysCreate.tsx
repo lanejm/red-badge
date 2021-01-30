@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import APIURL from '../../helpers/environment';
 
 interface HolidaysCreateProp {
     holiday: string,
@@ -38,7 +39,7 @@ class HolidaysCreate extends React.Component<HolidaysCreateProp, HolidaysCreateS
             date: this.state.date,
             received: this.state.received
         }
-        fetch('http://localhost:8081/holidays/create', {
+        fetch(`${APIURL}/holidays/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

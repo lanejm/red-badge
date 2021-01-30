@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import '../Gifts/create.css'
+import APIURL from '../../helpers/environment';
 
 interface GiftCreateProp {
     giftName: string;
@@ -62,7 +63,7 @@ class GiftsCreate extends React.Component<GiftCreateProp, GiftCreateState> {
             from: this.state.from,
             price: this.state.price,
         }
-        fetch('http://localhost:8081/gifts/create', {
+        fetch(`${APIURL}/gifts/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

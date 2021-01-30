@@ -8,6 +8,7 @@ import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import ItemsTable from './components/Gifts/Items';
 import HolidaysCreate from './components/Gifts/HolidaysCreate';
 import HolidayItemsTable from './components/Gifts/HolidaysItems';
+import APIURL from './helpers/environment';
 
 interface State {
   giftName: string;
@@ -102,7 +103,7 @@ class App extends React.Component<{}, State> {
   }
 
   deleteItems = (item: number) => {
-    fetch(`http://localhost:8081/gifts/delete/${item}`, {
+    fetch(`${APIURL}/gifts/delete/${item}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -114,7 +115,7 @@ class App extends React.Component<{}, State> {
   }
 
   deleteHolidays = (item: number) => {
-    fetch(`http://localhost:8081/holidays/delete/${item}`, {
+    fetch(`${APIURL}/holidays/delete/${item}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -149,7 +150,7 @@ class App extends React.Component<{}, State> {
     localStorage.setItem('token', newToken)
   }
   fetchGifts = () => {
-    fetch(`http://localhost:8081/gifts/${localStorage.getItem('id')}`, {
+    fetch(`${APIURL}/gifts/${localStorage.getItem('id')}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -165,7 +166,7 @@ class App extends React.Component<{}, State> {
 
   }
   fetchHolidays = () => {
-    fetch(`http://localhost:8081/holidays/${localStorage.getItem('id')}`, {
+    fetch(`${APIURL}/holidays/${localStorage.getItem('id')}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

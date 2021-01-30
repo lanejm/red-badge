@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'reactstrap'
 import '../Auth/auth.css'
+import APIURL from '../../helpers/environment';
 
 
 interface AuthProp {
@@ -65,7 +66,7 @@ class Auth extends React.Component<AuthProp, AuthState> {
 
     handleSubmit = (e: any) => {
         e.preventDefault()
-        const url = `http://localhost:8081/user/${this.state.login ? 'login' : 'register'}`
+        const url = `${APIURL}/user/${this.state.login ? 'login' : 'register'}`
         const body = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,

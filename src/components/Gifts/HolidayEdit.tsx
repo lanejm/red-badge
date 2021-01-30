@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button} from 'reactstrap';
+import APIURL from '../../helpers/environment';
 
 interface HolidayEditProps {
     holiday: string,
@@ -43,7 +44,7 @@ class HolidaysEdit extends React.Component<HolidayEditProps, HolidayEditState> {
             received: this.state.received,
     
         }
-        fetch(`http://localhost:8081/holidays/edit/${this.props.itemId}`, {
+        fetch(`${APIURL}/holidays/edit/${this.props.itemId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
