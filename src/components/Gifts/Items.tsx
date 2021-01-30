@@ -1,6 +1,5 @@
 import React from 'react';
 import GiftEdit from './Edit';
-// import GiftsList from './List';
 import {
     Card, CardHeader, CardFooter, CardBody, CardSubtitle, Row, Col, Button, ButtonToggle, Collapse
 } from 'reactstrap';
@@ -68,7 +67,6 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
     }
     toggleEdit = () => {
         this.setState({ collapsed: !this.state.collapsed })
-        // this.props.setShowEdit(true)
     }
 
 
@@ -139,7 +137,5 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
 
 export default ItemsTable;
 
-
-//style cards - hover, search
 
 

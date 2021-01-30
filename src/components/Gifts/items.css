@@ -32,12 +32,12 @@ h6::first-letter{
     text-transform: uppercase;
 }
 
-#editGift {
+#editGift, #editHoliday {
     margin-bottom: 5px;
     background-color: rgb(130, 217, 87);
 }
 
-#deleteGift {
+#deleteGift, #deleteHoliday {
     background-color: rgb(236, 99, 30);
 }
 

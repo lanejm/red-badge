@@ -2,6 +2,8 @@ import React from 'react';
 import {
     Card, CardHeader, CardBody, CardSubtitle, Row, Col, Button, ButtonToggle, Collapse
 } from 'reactstrap';
+import HolidayEdit from './HolidayEdit';
+import '../Gifts/items.css';
 
 interface HolidayItemsProp {
     holiday: string,
@@ -52,23 +54,24 @@ class HolidayItemsTable extends React.Component<HolidayItemsProp, HolidayItemsSt
                     return (
                         <Col className="col-sm-3">
                             <br />
-                            <Card className="holidayCard" key={item.id}
+                            <Card className="cards" key={item.id}
                                 onMouseEnter={() => { this.setState({ itemId: item.id }) }}>
-                                <CardHeader className="holiday-name" tag="h2">{item.holiday}</CardHeader>
-                                <CardBody className="holiday-text">
+                                <CardHeader className="item-name" tag="h2">{item.holiday}</CardHeader>
+                                <CardBody className="card-text">
                                     <CardSubtitle tag="h6">Date: {item.date}</CardSubtitle>
                                     <CardSubtitle tag="h6">Items Received: {item.received}</CardSubtitle>
                                 </CardBody>
                                 <ButtonToggle id="editHoliday" onClick={this.toggleHolidayEdit}>Edit Holiday</ButtonToggle>
                                 <Collapse isOpen={!this.state.collapsed && this.state.itemId === item.id}>
-                                    {/* <HolidayEdit itemId={item.id} key={item.id}
+                                    <HolidayEdit itemId={item.id} key={item.id}
                                         fetchHolidays={this.props.fetchHolidays}
                                         sessionToken={this.props.sessionToken}
                                         setShowEdit={this.props.setShowEdit}
                                         isLoggedIn={this.props.isLoggedIn}
                                         holiday={this.props.holiday}
-                                        date={this.props.date}>
-                                        </HolidayEdit> */}
+                                        date={this.props.date}
+                                        received={this.props.received}>
+                                        </HolidayEdit>
                                 </Collapse>
                                 {true ?
                                     <Button id="deleteHoliday" onClick={e => window.confirm("Are you sure you want ot delete this holiday?") && this.props.deleteHolidays(item.id)}>

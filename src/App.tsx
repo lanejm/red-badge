@@ -3,15 +3,11 @@ import './App.css';
 import Auth from './components/Auth/Auth';
 import NavFile from './components/Navbar/Navbar';
 import GiftsCreate from './components/Gifts/Create';
-// import GiftsList from './components/Gifts/List';
 import Search from './components/Gifts/Search';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import ItemsTable from './components/Gifts/Items';
 import HolidaysCreate from './components/Gifts/HolidaysCreate';
 import HolidayItemsTable from './components/Gifts/HolidaysItems';
-// import Logout from './components/Navbar/Logout/Logout';
-// import GiftEdit from './components/Gifts/Edit';
-
 
 interface State {
   giftName: string;
@@ -28,7 +24,6 @@ interface State {
   userId: string;
   updateToken: string;
   isLoggedIn: boolean;
-  // clearToken: any;
   setIsLoggedIn: (e: any) => void;
   showCreate: boolean;
   setShowCreate: (e: any) => void;
@@ -40,18 +35,6 @@ interface State {
   received: string;
 }
 
-// const clearToken = () => {
-//   userId('')
-//   sessionToken('')
-//   localStorage.clear()
-// }
-
-// const updateToken = (newToken: string, id: any) => {
-//   sessionToken(newToken)
-//   userId(id)
-//   localStorage.setItem('id', id)
-//   localStorage.setItem('token', newToken)
-// }
 
 
 class App extends React.Component<{}, State> {
@@ -74,13 +57,6 @@ class App extends React.Component<{}, State> {
       updateToken: '',
       setHolidays: [],
       received: '',
-      // clearToken: () => {
-      //   this.setState({
-      //     isLoggedIn: false,
-      //     sessionToken: '',
-      //     userId: ''
-      //   })
-      // },
       setIsLoggedIn: (e) => {
         this.setState({
           isLoggedIn: e
@@ -118,21 +94,6 @@ class App extends React.Component<{}, State> {
     })
   }
 
-  // handleSearch = (e: any) => {
-  //   fetch(`http://localhost:8081/gifts/name/${this.state.giftName}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': this.state.sessionToken
-  //     }
-  //   })
-  //     .then(r => r.json())
-  //     .then(rArr => {
-  //       this.setState({
-  //         setGifts: rArr
-  //       })
-  //     }).catch(err => console.log(err))
-  // }
   handleSearchChange = (e: any) => {
     this.setState({
       ...this.state,
@@ -167,7 +128,7 @@ class App extends React.Component<{}, State> {
   componentDidMount() {
     if (localStorage.getItem('token')) {
       this.setState({
-        isLoggedIn: true
+        isLoggedIn: true,
       })
     }
   }
@@ -219,14 +180,6 @@ class App extends React.Component<{}, State> {
       }).catch(err => console.log(err))
   }
 
-
-  // this.componentDidMount() {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     this.state.sessionToken
-  //     // setUserId(parseInt(localStorage.getItem('id')))  //parseInt makes user id an integer
-  //   }
-  // handleSearch() //outside of if statement so code is running
   render() {
     return (
       <div className='App' style={{ backgroundColor: 'black rgb(20, 20, 20)', height: '100%' }}>
@@ -238,12 +191,6 @@ class App extends React.Component<{}, State> {
               setShowCreate={this.state.setShowCreate}
               setHolidayCreate={this.state.setShowHolidays}
             />
-
-            {/* <Logout 
-              clearToken={this.state.clearToken}/> */}
-            {/* <Route exact path="/create"> */}
-
-            {/* </Route> */}
           </Switch>
           <HolidaysCreate
             showHolidays={this.state.showHolidays}
@@ -251,8 +198,8 @@ class App extends React.Component<{}, State> {
             fetchHolidays={this.fetchHolidays}
             holiday={this.state.holiday}
             date={this.state.date}
-            sessionToken={this.state.sessionToken} 
-            received={this.state.received}/>
+            sessionToken={this.state.sessionToken}
+            received={this.state.received} />
           <GiftsCreate
             fetchGifts={this.fetchGifts}
             showCreate={this.state.showCreate}
@@ -266,18 +213,13 @@ class App extends React.Component<{}, State> {
             owner={this.state.owner}
             price={this.state.price}
             sessionToken={this.state.sessionToken} />
-
-          {/* <Auth updateToken={this.updateToken} />  */}
           {this.state.isLoggedIn === false ? <Auth
             setIsLoggedIn={this.state.setIsLoggedIn}
             updateToken={this.updateToken} /> : null}
-          {/* <Button onClick={() => { this.setState({ isLoggedIn: true }) }}>Test</Button> */}
-          {/* <input placeholder='Ex: gift name' id="searchBar" value={this.state.giftName} onChange={e => this.handleSearch(e)}></input>
-          <br />
-        <Button id='search' onClick={this.handleSearch}>Search</Button> */}
           {this.state.isLoggedIn ?
             <React.Fragment>
               <Search
+                sessionToken={this.state.sessionToken}
                 userId={this.state.userId}
                 isLoggedIn={this.state.isLoggedIn}
                 fetchGifts={this.fetchGifts}
@@ -303,7 +245,8 @@ class App extends React.Component<{}, State> {
                 owner={this.state.owner}
                 sessionToken={this.state.sessionToken}
                 userId={this.state.userId} />
-                <HolidayItemsTable
+              <h1 className="mainText">Here are your holidays!</h1>
+              <HolidayItemsTable
                 holiday={this.state.holiday}
                 date={this.state.date}
                 received={this.state.received}
@@ -317,7 +260,6 @@ class App extends React.Component<{}, State> {
             : null
           }
           <br />
-          {/* <GiftsList userId={userId} fetchGifts={fetchGifts} gifts={gifts} /> */}
         </Router>
       </div>
     )
@@ -327,15 +269,12 @@ class App extends React.Component<{}, State> {
 export default App;
 
 
-//add holidays table
+//fix search bug
+//holiday search
 //styling
 //mobile friendly
 //admin functionality - be able to delete user
 //readme file
-//db associations
 //clean up code
-//fix search bug
-//holiday search
-//holiday edit
 
 //heroku deployment

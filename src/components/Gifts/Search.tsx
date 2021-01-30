@@ -1,8 +1,9 @@
 import React from 'react';
 import '../Gifts/search.css'
 
+
 import {
-     Button, 
+    Button,
 } from 'reactstrap';
 
 
@@ -13,7 +14,8 @@ interface SearchProps {
     fetchGifts: any;
     isLoggedIn: boolean;
     userId: string;
-    
+    sessionToken: string;
+
 }
 
 interface SearchState {
@@ -39,25 +41,27 @@ class Search extends React.Component<SearchProps, SearchState> {
 
     fetchGiftsName = () => {
         fetch(`http://localhost:8081/gifts/name/${this.state.searchTerm}`, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token') || ''
+            }
         }).then(r => r.json())
             .then(rArr => {
-                // if(rArr.owner === this.props.userId) {
                 this.props.handleSearch(rArr)
                 this.setState({
                     searchComplete: true
                 })
             })
             .catch(err => alert('Enter a search term!'))
-
-        }
+    }
 
 
     render() {
         return (
             <div>
-                <input id="inputBar" type="text" name="search" placeholder="Search..." value={this.state.searchTerm} onChange={e => this.setState({searchTerm: e.target.value})} />
-                <Button id="searchButton" onClick={this.fetchGiftsName}>Search</Button>
+                <input id="inputBar" type="text" name="search" placeholder="Search..." value={this.state.searchTerm} onChange={e => this.setState({ searchTerm: e.target.value })} />
+                <Button id="searchButton" onClick={this.fetchGiftsName}>Search Gifts</Button>
                 <Button id="cancelButton" onClick={this.props.fetchGifts}>Cancel</Button>
             </div>
         );
