@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "red-badge",
   "version": "0.1.0",
   "private": true,
@@ -48,4 +49,26 @@
     ]
   },
   "devDependencies": {}
+=======
+  "name": "node-modules-server",
+  "version": "1.0.0",
+  "description": "Journal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon"
+  },
+  "author": "YOUR NAME HERE",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.6",
+    "pg": "^7.11.0",
+    "sequelize": "^5.22.3"
+  }
+>>>>>>> 1bb83ceeb79bf6bd63d6a5aec6c82aa6ec97617d
 }
