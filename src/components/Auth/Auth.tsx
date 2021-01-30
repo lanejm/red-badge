@@ -5,13 +5,7 @@ import APIURL from '../../helpers/environment';
 
 
 interface AuthProp {
-    // firstName: string;
-    // lastName: string;
-    // email: string;
-    // password: string;
-    // login: boolean;
     updateToken: (newToken: string, id: any) => void;
-    // e: any;
     setIsLoggedIn: (e: any) => void
 }
 
@@ -89,20 +83,9 @@ class Auth extends React.Component<AuthProp, AuthState> {
                     this.props.setIsLoggedIn(true) }
                 })
                 .catch(err => console.log(err))
-            // this.setState({isLoggedIn:true})
         } else {
             window.alert("Password must be at least 8 characters")
         }
-    }
-
-    validateEmail(email: any) {
-        const emailFormat = (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(String(email).toLowerCase()))
-        if (email.match(emailFormat)) {
-            alert("Great Email!")
-            return true;
-        };
-        alert("That's not an email?!")
-        return (false);
     }
 
 
@@ -153,9 +136,3 @@ class Auth extends React.Component<AuthProp, AuthState> {
 }
 
 export default Auth;
-
-
-//reactstrap form?
-
-//login is not showing gift list based on id.
-//login and password verification logic

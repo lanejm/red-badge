@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import {Button} from 'reactstrap';
 import "./logout.css"
 
-//make this a class component, clearToken as a prop? 
+ 
 interface LogoutProps {
     clearToken: any;
     
@@ -22,14 +22,6 @@ class Logout extends React.Component<LogoutProps, LogoutState> {
         }
     }
 
-//     clearToken() {
-//     this.setState({
-//       clearToken: ''
-//     })
-//     console.log("test of clear token")
-//     localStorage.clear()
-//   }
-
 
   render () {
       return(
@@ -42,14 +34,3 @@ class Logout extends React.Component<LogoutProps, LogoutState> {
 }
 
 export default Logout;
-
-// const Logout = (props: any) => {
-
-//     return(
-//         <div>
-//             <Button className="navButtons" color='danger' id='logout' onClick={() => props.clearToken()}>Logout</Button>
-//         </div>
-//     )
-// }
-
-// export default Logout
