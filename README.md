@@ -1,3 +1,16 @@
+Welcome to GiftTag! 
+
+INTRODUCTION
+------------
+
+This app is a way for you to keep track of all the gifts you have received over the years in one location.  No more writing things down in a notebook or piece of paper, only to lose that item somewhere in your residence! One can also keep track of what gifts were received on which holidays. 
+
+You can visit the working version here [gift-tag](https://jml-gift-tag.herokuapp.com/). 
+
+To submit bug reports and/or feature suggestions, please email joshlane3@gmail.com. 
+
+INSTALLATION
+------------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -14,33 +27,18 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+You can visit the front end github repo for this project on [Github](https://github.com/lanejm/red-badge).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You will need to run ### `npm install` to make sure you have the correct npm versions.  You will also need to connect to a backend server for app to work properly. 
 
-### `npm run build`
+FUNCTIONALITY
+-------------
+You can register as a new user or log in as existing user.  Once logged in, you can click the drop down menu in the upper left hand corner to create a new gift, add a holiday, or logout.  Once you fill out the modal, your gifts/holidays will show on the screen.  You can then edit/delete these gifts/holidays, if necessary.  All gifts will display in alphabetical order and you can search for a gift via the search bar.  Search will locate gifts based on the gift name assigned to that gift.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+AUTHORS
+-------
+Joshua Lane - intial work - [lanejm](https://github.com/lanejm)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+ACKNOWLEDGMENTS
+---------------
+Hat tip to Eleven Fifty Academy instructors (Eli, Jerome, Zach) and the LAs (Amit) that assisted with debugging and for being awesome people.  
