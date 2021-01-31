@@ -7,7 +7,7 @@ This app is a way for you to keep track of all the gifts you have received over 
 
 You can visit the working version here [gift-tag](https://jml-gift-tag.herokuapp.com/). 
 
-To submit bug reports and/or feature suggestions, please email joshlane3@gmail.com. 
+To submit bug reports and/or feature suggestions, please [email](joshlane3@gmail.com) me. 
 
 INSTALLATION
 ------------
@@ -27,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-You can visit the front end github repo for this project on [Github](https://github.com/lanejm/red-badge).
+You can visit the github repo for this project on [Github](https://github.com/lanejm/red-badge).
 
 You will need to run ### `npm install` to make sure you have the correct npm versions.  You will also need to connect to a backend server for app to work properly. 
 
