@@ -39,3 +39,206 @@ yellow rgb(236, 236, 80)
 orange rgb(236, 99, 30)
 green rgb(130, 217, 87)
 black rgb(20, 20, 20) */
+
+/* Auth CSS */
+.loginBtn, .submitBtn {
+  transition: all 1s ease;
+  margin: 10px;
+  background-color: white;
+  font-style: italic;
+  font-weight: 500;
+  color: rgb(130, 217, 87)
+}
+
+.loginBtn:focus {
+  outline: 0px;
+}
+.loginBtn:active {
+padding-bottom: 10px;
+  border-bottom: solid 2px #1059FF;
+}
+
+
+.login-register {
+height: 420px;
+width: 380px;
+margin-left: auto;
+margin-right: auto;
+padding: 1em 2em;
+font-style: italic;
+font-weight: 800;
+border-radius: 80px;
+box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+overflow: hidden;
+background: rgb(130, 217, 87);
+color: rgb(255, 255, 255);
+transition: all 2s ease;
+}
+
+/* Create CSS */
+
+@media screen and (max-width: 300px) {
+
+#createGift{
+  text-align: center;
+  color: rgb(64, 173, 206);
+  padding: 1em;
+}
+input, label {
+  width: 210px;
+}
+
+#clearForm, #submitGift {
+  font-size: 1.5em;
+  margin-right: 2em;
+  border: 0px;
+  cursor: pointer;
+  position: relative;
+  font-family: 'Texturina', serif;
+  font-weight: 500;
+  font-style: italic;
+  border-radius: 25px;
+}
+
+#createGiftText h5{
+  font-family: 'Texturina', serif;
+  font-weight: 800;
+  font-style: italic;
+  text-align: center;
+  color: white;
+}
+
+#modalWindow {
+  border-radius: 50px;
+}
+
+#modalFooter {
+  background-color:  rgba(0, 102, 178, 1);
+}
+}
+
+
+
+/* Items CSS */
+.testing{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.cards {
+  color: rgb(64, 173,206);
+  width: 300px;
+  border-color: rgb(236, 236, 80);
+  margin: auto;
+}
+
+.cards :hover {
+  color: rgb(236, 99, 30);
+  transition: 1s;
+}
+
+.card-column {
+  margin-top: 50px;
+  
+}
+
+h2::first-letter{
+  text-transform: uppercase;
+}
+
+h6::first-letter{
+  text-transform: uppercase;
+}
+
+#editGift, #editHoliday {
+  margin-bottom: 5px;
+  background-color: rgb(130, 217, 87);
+}
+
+#deleteGift, #deleteHoliday {
+  background-color: rgb(236, 99, 30);
+}
+
+/* Search CSS */
+input[type=text] {
+  width: 130px;
+  height: 35px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+  width: 30%;
+}
+
+#searchButton {
+  margin-left: 10px;
+  height: 35px;
+  background-color: rgb(64, 173, 206);
+  /* float: left; */
+}
+
+#cancelButton {
+margin-left: 10px;
+height: 35px;
+background-color: rgb(236, 99, 30);
+}
+
+#inputBar {
+  margin-left: 25px;
+  margin-top: 25px;
+  
+}
+
+/* Navbar CSS */
+.navButtons {
+  font-size: 1.25em;
+  /* margin-right: 2em; */
+  border: 0px;
+  cursor: pointer;
+  font-family: 'Texturina', serif;
+  font-weight: 500;
+  font-style: italic;
+  border-radius: 25px;
+  margin-top: .5em;
+  float: left;
+ 
+}
+
+#navbarToggler{
+  background-color: rgb(236, 236, 80);
+  float: right;
+  position: relative;
+}
+
+
+#logout {
+  background-color: rgb(236, 99, 30);
+}
+
+.navbar {
+  /* float: right; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}

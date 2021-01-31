@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import '../Gifts/create.css'
+import '../../App.css'
 import APIURL from '../../helpers/environment';
 
 interface GiftCreateProp {

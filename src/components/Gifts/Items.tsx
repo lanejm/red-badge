@@ -3,7 +3,7 @@ import GiftEdit from './Edit';
 import {
     Card, CardHeader, CardFooter, CardBody, CardSubtitle, Row, Col, Button, ButtonToggle, Collapse
 } from 'reactstrap';
-import '../Gifts/items.css';
+import '../../App.css';
 
 
 interface ItemsProp {
@@ -77,7 +77,7 @@ class ItemsTable extends React.Component<ItemsProp, ItemsState> {
                     <br />
                     
                     return (
-                        <Col className="col-sm-3">
+                        <Col className="img-responsive">
                             <br />
                             <Card className="cards" key={item.id}
                                 onMouseEnter={() => { this.setState({ itemId: item.id }) }}>

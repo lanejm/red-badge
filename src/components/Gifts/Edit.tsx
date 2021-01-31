@@ -102,9 +102,6 @@ class GiftEdit extends React.Component<EditProps, EditState> {
                     <label htmlFor='purchased'>Purchased: </label>
                     <input name='purchased' placeholder='Where was this purchased?' id='purchased' value={this.state.purchased} onChange={e => this.handleEdit(e)} />
                     <br />
-                    <label htmlFor='person'>Person: </label>
-                    <input name='person' placeholder='Who was this for?' id='person' value={this.state.person} onChange={e => this.handleEdit(e)} required />
-                    <br />
                     <label htmlFor='from'>From: </label>
                     <input name='from' placeholder='Who was this from?' id='from' value={this.state.from} onChange={e => this.handleEdit(e)} required />
                     <br />

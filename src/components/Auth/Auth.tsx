@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'reactstrap'
-import '../Auth/auth.css'
+import '../../App.css'
 import APIURL from '../../helpers/environment';
 
 

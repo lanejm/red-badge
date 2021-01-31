@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Gifts/search.css';
+import '../../App.css';
 import APIURL from '../../helpers/environment';
 
 

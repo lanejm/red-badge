@@ -2,7 +2,7 @@ import React from 'react';
 import Logout from './Logout/Logout';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Button, } from 'reactstrap';
-import './navbar.css';
+import '../../App.css';
 
 interface NavProps {
   isLoggedIn: boolean;
