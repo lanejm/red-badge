@@ -76,9 +76,6 @@ transition: all 2s ease;
 }
 
 /* Create CSS */
-
-@media screen and (max-width: 300px) {
-
 #createGift{
   text-align: center;
   color: rgb(64, 173, 206);
@@ -115,6 +112,44 @@ input, label {
 #modalFooter {
   background-color:  rgba(0, 102, 178, 1);
 }
+
+@media screen and (max-width: 300px) {
+  #createGift{
+    text-align: center;
+    color: rgb(64, 173, 206);
+    padding: 1em;
+  }
+  input, label {
+    width: 210px;
+  }
+  
+  #clearForm, #submitGift {
+    font-size: 1.5em;
+    margin-right: 2em;
+    border: 0px;
+    cursor: pointer;
+    position: relative;
+    font-family: 'Texturina', serif;
+    font-weight: 500;
+    font-style: italic;
+    border-radius: 25px;
+  }
+  
+  #createGiftText h5{
+    font-family: 'Texturina', serif;
+    font-weight: 800;
+    font-style: italic;
+    text-align: center;
+    color: white;
+  }
+  
+  #modalWindow {
+    border-radius: 50px;
+  }
+  
+  #modalFooter {
+    background-color:  rgba(0, 102, 178, 1);
+  }
 }
 
 
