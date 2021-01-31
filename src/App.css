@@ -242,3 +242,66 @@ background-color: rgb(236, 99, 30);
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 }
+
+/* iPad PORTRAIT*/
+@media screen and (max-width: 769px) {
+  .cards {
+    color: rgb(64, 173,206);
+    width: 250px;
+    border-color: rgb(236, 236, 80);
+    margin: auto;
+  }
+  
+  .cards :hover {
+    color: rgb(236, 99, 30);
+    transition: 1s;
+  }
+  
+  .card-column {
+    margin-top: 50px;
+    
+  }
+}
+
+/* iPad Pro LANDSCAPE*/
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) and (orientation : landscape) {
+}
+
+/* iPad LANDSCAPE*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+  .cards {
+    color: rgb(64, 173,206);
+    width: 250px;
+    border-color: rgb(236, 236, 80);
+    margin: auto;
+  }
+  
+  .cards :hover {
+    color: rgb(236, 99, 30);
+    transition: 1s;
+  }
+  
+  .card-column {
+    margin-top: 50px;
+    
+  }
+}
+/* iPad Pro PORTRAIT */
+@media screen and (max-width: 1024px) {
+  .cards {
+    color: rgb(64, 173,206);
+    width: 250px;
+    border-color: rgb(236, 236, 80);
+    margin: auto;
+  }
+  
+  .cards :hover {
+    color: rgb(236, 99, 30);
+    transition: 1s;
+  }
+  
+  .card-column {
+    margin-top: 50px;
+    
+  }
+}
