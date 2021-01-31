@@ -3,7 +3,7 @@ import {
     Card, CardHeader, CardBody, CardSubtitle, Row, Col, Button, ButtonToggle, Collapse
 } from 'reactstrap';
 import HolidayEdit from './HolidayEdit';
-import '../Gifts/items.css';
+import '../../App.css';
 
 interface HolidayItemsProp {
     holiday: string,
@@ -52,7 +52,7 @@ class HolidayItemsTable extends React.Component<HolidayItemsProp, HolidayItemsSt
                     <br />
 
                     return (
-                        <Col className="col-sm-3">
+                        <Col className="img-responsive">
                             <br />
                             <Card className="cards" key={item.id}
                                 onMouseEnter={() => { this.setState({ itemId: item.id }) }}>
