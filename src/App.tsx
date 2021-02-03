@@ -95,13 +95,6 @@ class App extends React.Component<{}, State> {
     })
   }
 
-  handleSearchChange = (e: any) => {
-    this.setState({
-      ...this.state,
-      [e.target.name]: e.target.value
-    })
-  }
-
   deleteItems = (item: number) => {
     fetch(`${APIURL}/gifts/delete/${item}`, {
       method: 'DELETE',
