@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
-import {Button, Alert} from 'reactstrap';
+import {Button} from 'reactstrap';
 import  '../Gifts/create.css'
 
 
@@ -49,8 +48,6 @@ const GiftsCreate = (props: any) => {
         .then(rObj => {
             console.log(rObj)
             resetForm(null)
-            // history.push('/')
-            // props.fetchGifts
         })
     }
 
@@ -83,17 +80,10 @@ const GiftsCreate = (props: any) => {
                 <br />
                 <Button color='secondary' style={{marginLeft: '20px'}} id='resetForm' onClick={resetForm} type='button'>Reset Gift Form</Button>
                 <Button color='success' style={{marginLeft: '15px'}} id="submitReview" onClick={handleSubmit} type="submit" >Submit Gift!</Button>
-                {/* <Alert color="success">Gift submitted!</Alert> */}
             </form>
             <br />
-            {/* <ReviewsList /> */}
         </div>
     )
 }
 
 export default GiftsCreate
-
-//make this a modal? 
-//notes entry
-//alert when gift submitted?
-//styling for input fields.

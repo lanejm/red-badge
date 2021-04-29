@@ -2,16 +2,6 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {Button} from 'reactstrap';
 
-// type GiftProps = {
-//     giftName: string,
-//     description: string,
-//     date: string,
-//     purchased: string,
-//     person: string,
-//     from: string,
-//     owner: string,
-//     price: string
-// }
 
 const GiftEdit = (props: any) => {
 
@@ -102,7 +92,6 @@ const GiftEdit = (props: any) => {
                 <br />
                 <Button color='secondary' style={{marginLeft: '20px'}} id='resetForm' onClick={resetForm} type='button'>Reset Gift Form</Button>
                 <Button color='success' style={{marginLeft: '15px'}} id="submitReview" onClick={handleSubmit} type="submit" >Submit Gift!</Button>
-                {/* <Alert color="success">Gift submitted!</Alert> */}
             </form>
             : null}
         </div>

@@ -10,7 +10,6 @@ const GiftsList = (props: any) => {
     )
 
 
-//not working currently
     return (
         <div className="listItem">
             {props.gifts.map((revObj: any, i:any) => <ItemsTable fetchGifts={props.fetchGifts} rev={revObj} key={i} userId={props.userId} />)}

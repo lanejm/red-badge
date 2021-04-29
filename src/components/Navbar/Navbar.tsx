@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Logout from './Logout/Logout';
 import {Link} from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Button } from 'reactstrap';
-// import './Navbar.css';
 
 const NavFile = (props: any) => {
     const [collapsed, setCollapsed] = useState(true);
