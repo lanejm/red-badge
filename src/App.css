@@ -49,12 +49,6 @@ black rgb(20, 20, 20) */
   font-weight: 500;
 }
 
-.loginBtn:hover {
-  cursor: pointer;
-  outline: 0px;
-  color: rgb(64, 173, 206);
-
-}
 .loginBtn:active {
 padding-bottom: 10px;
   border-bottom: solid 5px #1059FF;
