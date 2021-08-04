@@ -176,7 +176,7 @@ class App extends React.Component<{}, State> {
 
   render() {
     return (
-      <div className='App' style={{ backgroundColor: 'black rgb(20, 20, 20)', height: '100%' }}>
+      <div className='App'>
         <Router>
           <Switch>
             <NavFile

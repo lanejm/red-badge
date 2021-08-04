@@ -44,18 +44,20 @@ black rgb(20, 20, 20) */
 .loginBtn, .submitBtn {
   transition: all 1s ease;
   margin: 10px;
-  background-color: white;
+  color: white;
   font-style: italic;
   font-weight: 500;
-  color: rgb(130, 217, 87)
 }
 
-.loginBtn:focus {
+.loginBtn:hover {
+  cursor: pointer;
   outline: 0px;
+  color: rgb(64, 173, 206);
+
 }
 .loginBtn:active {
 padding-bottom: 10px;
-  border-bottom: solid 2px #1059FF;
+  border-bottom: solid 5px #1059FF;
 }
 
 
